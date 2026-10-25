@@ -1,0 +1,6 @@
+## BUG-3525 · 本機影片重開續播時內嵌 ASS 副字幕消失
+- **报告**：2026-10-25（用户：Young Ladies Don't Play Fighting Games 本機影片重開後仍只有主字幕）
+- **真实性**：✅ 真 bug。實際第 4 集保存 `secondary_subtitle_source=embedded:10`，對應 Traditional_CR ASS 軌。`fushi/lib/src/pages/implementations/video_fushi/subtitle.part.dart:1135` 原先只以軌號重建來源、漏掉 codec；`packages/fushi_engine/lib/media/video/video_subtitle_source.dart:1176` 依 codec 決定快取副檔名，空 codec 回退 SRT，因此找 `sub_10.srt`，批次抽取卻按容器 ASS 寫 `sub_10.ass`，最終 extractionFailed。主字幕是外部日文 SRT，因此照常恢復。先前 BUG-3524 只修遠端格式，未修這條本機路徑。
+- **[x] ① 已修复** — 重新枚舉並按持久化值精確匹配完整內嵌來源，保留 codec；保留外掛路徑與切集世代／控制器身份檢查。提交見本條隨附修復提交。
+- **[x] ② 已加自动化测试** — `fushi/test/media/video/video_secondary_subtitle_same_list_guard_test.dart` 鎖定恢復必須保留枚舉來源；`video_subtitle_source_test.dart` 用 fake backend 證明完整 ASS 來源可讀、無 codec 來源尋錯副檔名而失敗。舊碼回歸守衛已確認失敗。真播放器／真影片重開測試：`fushi/integration_test/video_local_secondary_resume_itest.dart`（隔離 DB，可傳入實際影片與主字幕樣本）。
+- **备注**：Windows 真 app + 真 libmpv 實片驗收通過：使用者第 4 集影片位元相同副本、原日文 SRT、繁中 ASS `embedded:10`，從 1210083ms 連續重開兩次；每次主 cue=383、副 cue=390，約 1214 秒主副同時顯示，且控制器身份不同、原生 seek 位置已落地。已肉眼檢查截圖。證據：`C:/w/fsub/fushi/.codex-test/windows-itest/win-itest-20261025-211647-b14a0ff8/screenshots/local-secondary-resume-{0,1}.png` 與同目錄 JSON。測試資料庫與原資料隔離，未改動使用者進度。

@@ -33,10 +33,11 @@
 
 <!-- BUGS-INDEX:BEGIN（自动生成，勿手改；改完跑 `dart run tool/bug.dart reindex`）-->
 
-> 共 3154 条。点号进各自文件。
+> 共 3156 条。点号进各自文件。
 
 | BUG | 修复 | 测试 | 标题 |
 |---|:--:|:--:|---|
+| [BUG-3525](bugs/BUG-3525-local-embedded-secondary-resume.md) | ✅ | ✅ | 本機影片重開續播時內嵌 ASS 副字幕消失 |
 | [BUG-3524](bugs/BUG-3524-sentence-repeat-navigation.md) | ✅ | ✅ | 句子循環未隨主動跳句更新目標 |
 | [BUG-3524](bugs/BUG-3524-secondary-subtitle-resume-format.md) | ✅ | ✅ | 影片續播時 ASS／VTT 副字幕消失 |
 | [BUG-3523](bugs/BUG-3523-local-release-origin-target.md) | ✅ | ✅ | local-release-origin-target |

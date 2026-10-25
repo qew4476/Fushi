@@ -1101,7 +1101,7 @@ extension _VideoSubtitle on _VideoFushiPageState {
   /// 视频就绪后恢复用户选过的副字幕轨（TODO-857 / TODO-1312）。支持内嵌轨（`embedded:<n>`）
   /// 与外挂字幕文件绝对路径（BUG-900：与主字幕同一份可用列表后，副字幕也能选外挂，恢复
   /// 须对称支持外挂——否则重开视频副字幕丢失）：
-  ///  - 内嵌：解析 streamIndex → [SubtitleSource.embedded]。
+  ///  - 内嵌：按持久化值精确匹配重新枚举的来源，保留真实 codec。
   ///  - 外挂：绝对路径存在 → [SubtitleSource.external]（文件不在则跳过，与主字幕
   ///    [_restorePersistedSubtitle] 同判据）。
   /// 再 [loadCuesForSource] 抽 cue → [VideoPlayerController.setSecondaryCues]。
@@ -1126,14 +1126,14 @@ extension _VideoSubtitle on _VideoFushiPageState {
     if (videoPath == null) return;
     final SubtitleSource? source;
     if (persisted.startsWith(SubtitleSource.embeddedPrefix)) {
-      final int? streamIndex = int.tryParse(
-        persisted.substring(SubtitleSource.embeddedPrefix.length),
+      // 持久化值只有轨号，不能据此重建丢失 codec 的来源：未知 codec 会按 SRT
+      // 找缓存，而 ASS / VTT 抽取产物保留原格式，导致每次重开都找不到副字幕。
+      final List<SubtitleSource> sources = await listAllSubtitleSources(
+        videoPath,
+        langCode: _targetLangCode,
       );
-      if (streamIndex == null) return;
-      source = SubtitleSource.embedded(
-        streamIndex: streamIndex,
-        label: 'embedded:$streamIndex',
-      );
+      source = _firstMatching(sources, persisted);
+      if (source == null) return;
     } else if (File(persisted).existsSync()) {
       // 外挂源持久化值即其绝对路径（[SubtitleSource.toPersistedValue]）。
       source = SubtitleSource.external(

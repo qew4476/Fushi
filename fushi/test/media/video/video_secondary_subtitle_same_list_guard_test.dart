@@ -51,6 +51,20 @@ void main() {
     );
   });
 
+  test('embedded secondary restore retains enumerated codec and exact source', () {
+    final String body = methodBody(
+      source.readAsStringSync(),
+      'Future<void> _restoreSecondarySubtitle(',
+    );
+    expect(body, contains('await listAllSubtitleSources('));
+    expect(body, contains('_firstMatching(sources, persisted)'));
+    expect(
+      body,
+      isNot(contains('SubtitleSource.embedded(')),
+      reason: 'Rebuilding only the index loses codec and looks for ASS as SRT.',
+    );
+  });
+
   test('副字幕恢复对称支持外挂绝对路径（SubtitleSource.external + 文件存在）', () {
     final String src = source.readAsStringSync();
     final String body =

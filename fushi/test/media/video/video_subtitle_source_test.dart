@@ -915,6 +915,46 @@ BUG-2094 secondary import.
       );
     });
 
+    test(
+      'persisted ASS source needs enumerated codec to load its cached cues',
+      () async {
+        final File video = File(p.join(tempDir.path, 'resume_ass.mkv'))
+          ..writeAsStringSync('fake video bytes');
+        final _FakeFfmpegBackend backend = _FakeFfmpegBackend();
+        setFfmpegBackendForTesting(backend);
+        const String persisted = 'embedded:1';
+        final List<SubtitleSource> sources = await listAllSubtitleSources(
+          video.path,
+          langCode: 'ja',
+        );
+        final SubtitleSource restored = sources.singleWhere(
+          (SubtitleSource source) => source.matchesPersisted(persisted),
+        );
+        expect(restored.codec, 'ass');
+        final SubtitleCueLoadResult loaded = await loadSubtitleCueResult(
+          restored,
+          video.path,
+          'video_book_x://book/resume_ass',
+        );
+        expect(loaded.failure, isNull);
+        expect(loaded.cues, isNotEmpty);
+        final Directory cacheDir = embeddedSubtitleCacheDir(video.path);
+        expect(File(p.join(cacheDir.path, 'sub_1.ass')).existsSync(), isTrue);
+        expect(File(p.join(cacheDir.path, 'sub_1.srt')).existsSync(), isFalse);
+
+        // The former resume path rebuilt only the index. Empty codec defaults
+        // to SRT, which cannot find the ASS file extracted from the real track.
+        final SubtitleCueLoadResult missingCodec = await loadSubtitleCueResult(
+          const SubtitleSource.embedded(streamIndex: 1, label: persisted),
+          video.path,
+          'video_book_x://book/resume_ass',
+        );
+        expect(missingCodec.cues, isEmpty);
+        expect(missingCodec.failure, SubtitleCueLoadFailure.extractionFailed);
+        expect(backend.extractCount, 1);
+      },
+    );
+
     test('manual switch reuses a pending background extraction', () async {
       final File video = File(p.join(tempDir.path, 'pending.mkv'))
         ..writeAsStringSync('fake video bytes');
