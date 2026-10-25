@@ -96,7 +96,7 @@ try {
     $create = $creates[0][1]
     Assert-True ($create[([array]::IndexOf($create,'--repo')+1)] -eq 'qew4476/Fushi') 'Create must explicitly target fork.'
     Assert-True ($create[([array]::IndexOf($create,'--target')+1)] -eq $script:commit) 'Create must target manifest commit.'
-    Assert-True (($create -contains '--prerelease') -and ($create -contains '--latest=false')) 'Local release must remain a non-latest prerelease.'
+    Assert-True (($create -contains '--prerelease=false') -and ($create -contains '--latest') -and -not ($create -contains '--prerelease') -and -not ($create -contains '--latest=false')) 'Local release must be a stable Latest release.'
     $entry = Get-Content "$PSScriptRoot/local_windows.ps1" -Raw
     $preflight = $entry.IndexOf('Get-LocalReleaseRepository -RepositoryRoot')
     $sdk = $entry.IndexOf("'fushi/.fvmrc'")

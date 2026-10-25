@@ -44,7 +44,7 @@ function Publish-LocalWindowsInstaller {
     $tags = @(& gh api "repos/$Repository/releases" --paginate --jq '.[].tag_name')
     if ($LASTEXITCODE -ne 0) { throw "Cannot list releases in $Repository." }
     if ($tags -contains $Tag) { throw "Release $Tag already exists; assets are never overwritten." }
-    & gh release create $Tag $installer "$installer.sha256" --repo $Repository --target $m.commit --title "Fushi $($m.version) Windows" --notes 'Locally built Windows installer (unsigned).' --prerelease --latest=false
+    & gh release create $Tag $installer "$installer.sha256" --repo $Repository --target $m.commit --title "Fushi $($m.version) Windows" --notes 'Locally built Windows installer (unsigned).' --prerelease=false --latest
     if ($LASTEXITCODE -ne 0) { throw 'GitHub release upload failed. Fix the error, then run .\fushi publish to reuse the verified installer.' }
     & gh release view $Tag --repo $Repository --json url,assets
     if ($LASTEXITCODE -ne 0) { throw 'Cannot verify the published release.' }
