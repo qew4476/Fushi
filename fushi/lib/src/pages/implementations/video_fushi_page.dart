@@ -7512,6 +7512,9 @@ class _VideoFushiPageState extends ConsumerState<VideoFushiPage>
       ),
       copySubtitle: () => _copyCurrentSubtitles(secondary: false),
       copySecondarySubtitle: () => _copyCurrentSubtitles(secondary: true),
+      toggleSentenceRepeat: () => _runWhenImmersiveAllowsShortcuts(
+        () => unawaited(_toggleSentenceRepeat()),
+      ),
       replayCurrentSubtitle: () => _runWhenImmersiveAllowsShortcuts(
         () => unawaited(_replayCurrentCueAndKeepControls()),
       ),
@@ -10602,6 +10605,19 @@ class _VideoFushiPageState extends ConsumerState<VideoFushiPage>
     // 重播）都改走 [_keepControlsAliveIfVisible]，隐藏态一律不唤起；收藏这处更进一步，
     // 连续命都不需要（它压根不动播放位置）。
     await _toggleFavoriteCueForVideo(cue);
+  }
+
+  Future<void> _toggleSentenceRepeat() async {
+    final VideoPlayerController? controller = _controller;
+    if (controller == null) return;
+    final AudioCue? cue = _currentCueForAction();
+    if (!controller.isRepeatingSentence && cue == null) {
+      _showOsd(t.no_sentence_selected);
+      return;
+    }
+    final bool active = await controller.toggleSentenceRepeat(cue: cue);
+    if (!mounted) return;
+    _showOsd(active ? t.video_sentence_repeat_on : t.video_sentence_repeat_off);
   }
 
   Future<void> _replayCurrentCueAndKeepControls() async {

@@ -1,7 +1,7 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 142477 (8381 per locale)
+/// Strings: 142528 (8384 per locale)
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8483,6 +8483,8 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get shortcut_action_video_toggle_play_pause => 'Play / pause';
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
       'Toggle hide secondary subtitle';
+  String get shortcut_action_video_toggle_sentence_repeat =>
+      'Toggle current sentence repeat';
   String get shortcut_action_video_toggle_shader_compare =>
       'Toggle shader compare';
   String get shortcut_action_video_toggle_subtitle_blur =>
@@ -11152,6 +11154,8 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
   String get video_search_ai_ranked => 'Results reordered by AI';
   String get video_search_ai_recommended => 'AI pick';
   String get video_secondary_subtitle_sources => 'Secondary subtitle';
+  String get video_sentence_repeat_off => 'Current sentence repeat off';
+  String get video_sentence_repeat_on => 'Current sentence repeat on';
   String get video_setting_auto_play_next => 'Auto-play next episode';
   String get video_setting_auto_scrape => 'Auto-fetch series info';
   String get video_setting_auto_scrape_hint =>
@@ -26146,6 +26150,9 @@ class _StringsAr extends _StringsEn {
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
       'Toggle Hide Secondary Subtitle';
   @override
+  String get shortcut_action_video_toggle_sentence_repeat =>
+      'Toggle current sentence repeat';
+  @override
   String get shortcut_action_video_toggle_shader_compare =>
       'تبديل مقارنة المظلِّل';
   @override
@@ -30783,6 +30790,10 @@ class _StringsAr extends _StringsEn {
   String get video_search_ai_recommended => 'اختيار الذكاء الاصطناعي';
   @override
   String get video_secondary_subtitle_sources => 'ترجمة ثانوية';
+  @override
+  String get video_sentence_repeat_off => 'Current sentence repeat off';
+  @override
+  String get video_sentence_repeat_on => 'Current sentence repeat on';
   @override
   String get video_setting_auto_play_next => 'التشغيل التلقائي للحلقة التالية';
   @override
@@ -46698,6 +46709,9 @@ class _StringsDe extends _StringsEn {
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
       'Toggle Hide Secondary Subtitle';
   @override
+  String get shortcut_action_video_toggle_sentence_repeat =>
+      'Toggle current sentence repeat';
+  @override
   String get shortcut_action_video_toggle_shader_compare =>
       'Shader-Vergleich umschalten';
   @override
@@ -51393,6 +51407,10 @@ class _StringsDe extends _StringsEn {
   String get video_search_ai_recommended => 'KI-Empfehlung';
   @override
   String get video_secondary_subtitle_sources => 'Sekundärer Untertitel';
+  @override
+  String get video_sentence_repeat_off => 'Current sentence repeat off';
+  @override
+  String get video_sentence_repeat_on => 'Current sentence repeat on';
   @override
   String get video_setting_auto_play_next =>
       'Nächste Folge automatisch abspielen';
@@ -67375,6 +67393,9 @@ class _StringsEs extends _StringsEn {
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
       'Toggle Hide Secondary Subtitle';
   @override
+  String get shortcut_action_video_toggle_sentence_repeat =>
+      'Toggle current sentence repeat';
+  @override
   String get shortcut_action_video_toggle_shader_compare =>
       'Alternar comparación de shaders';
   @override
@@ -72085,6 +72106,10 @@ class _StringsEs extends _StringsEn {
   String get video_search_ai_recommended => 'Elección de la IA';
   @override
   String get video_secondary_subtitle_sources => 'Subtítulo secundario';
+  @override
+  String get video_sentence_repeat_off => 'Current sentence repeat off';
+  @override
+  String get video_sentence_repeat_on => 'Current sentence repeat on';
   @override
   String get video_setting_auto_play_next =>
       'Reproducir automáticamente el siguiente episodio';
@@ -88140,6 +88165,9 @@ class _StringsFr extends _StringsEn {
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
       'Toggle Hide Secondary Subtitle';
   @override
+  String get shortcut_action_video_toggle_sentence_repeat =>
+      'Toggle current sentence repeat';
+  @override
   String get shortcut_action_video_toggle_shader_compare =>
       'Basculer la comparaison de shaders';
   @override
@@ -92857,6 +92885,10 @@ class _StringsFr extends _StringsEn {
   String get video_search_ai_recommended => 'Choix de l\'IA';
   @override
   String get video_secondary_subtitle_sources => 'Sous-titre secondaire';
+  @override
+  String get video_sentence_repeat_off => 'Current sentence repeat off';
+  @override
+  String get video_sentence_repeat_on => 'Current sentence repeat on';
   @override
   String get video_setting_auto_play_next =>
       'Lecture auto de l\'épisode suivant';
@@ -108671,6 +108703,9 @@ class _StringsId extends _StringsEn {
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
       'Toggle Hide Secondary Subtitle';
   @override
+  String get shortcut_action_video_toggle_sentence_repeat =>
+      'Toggle current sentence repeat';
+  @override
   String get shortcut_action_video_toggle_shader_compare =>
       'Alihkan Bandingkan Shader';
   @override
@@ -113340,6 +113375,10 @@ class _StringsId extends _StringsEn {
   String get video_search_ai_recommended => 'Pilihan AI';
   @override
   String get video_secondary_subtitle_sources => 'Subtitle sekunder';
+  @override
+  String get video_sentence_repeat_off => 'Current sentence repeat off';
+  @override
+  String get video_sentence_repeat_on => 'Current sentence repeat on';
   @override
   String get video_setting_auto_play_next =>
       'Putar otomatis episode berikutnya';
@@ -129243,6 +129282,9 @@ class _StringsIt extends _StringsEn {
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
       'Toggle Hide Secondary Subtitle';
   @override
+  String get shortcut_action_video_toggle_sentence_repeat =>
+      'Toggle current sentence repeat';
+  @override
   String get shortcut_action_video_toggle_shader_compare =>
       'Attiva/disattiva confronto shader';
   @override
@@ -133924,6 +133966,10 @@ class _StringsIt extends _StringsEn {
   String get video_search_ai_recommended => 'Scelta dell\'IA';
   @override
   String get video_secondary_subtitle_sources => 'Sottotitolo secondario';
+  @override
+  String get video_sentence_repeat_off => 'Current sentence repeat off';
+  @override
+  String get video_sentence_repeat_on => 'Current sentence repeat on';
   @override
   String get video_setting_auto_play_next =>
       'Riproduci automaticamente l\'episodio successivo';
@@ -149112,6 +149158,9 @@ class _StringsJa extends _StringsEn {
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
       'Toggle Hide Secondary Subtitle';
   @override
+  String get shortcut_action_video_toggle_sentence_repeat =>
+      'Toggle current sentence repeat';
+  @override
   String get shortcut_action_video_toggle_shader_compare => 'シェーダー比較の切り替え';
   @override
   String get shortcut_action_video_toggle_subtitle_blur => '字幕ぼかしの切り替え';
@@ -153625,6 +153674,10 @@ class _StringsJa extends _StringsEn {
   String get video_search_ai_recommended => 'AIのおすすめ';
   @override
   String get video_secondary_subtitle_sources => '副字幕';
+  @override
+  String get video_sentence_repeat_off => 'Current sentence repeat off';
+  @override
+  String get video_sentence_repeat_on => 'Current sentence repeat on';
   @override
   String get video_setting_auto_play_next => '次のエピソードを自動再生';
   @override
@@ -168724,6 +168777,9 @@ class _StringsKo extends _StringsEn {
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
       'Toggle Hide Secondary Subtitle';
   @override
+  String get shortcut_action_video_toggle_sentence_repeat =>
+      'Toggle current sentence repeat';
+  @override
   String get shortcut_action_video_toggle_shader_compare => '셰이더 비교 전환';
   @override
   String get shortcut_action_video_toggle_subtitle_blur => '자막 흐리게 전환';
@@ -173242,6 +173298,10 @@ class _StringsKo extends _StringsEn {
   String get video_search_ai_recommended => 'AI 추천';
   @override
   String get video_secondary_subtitle_sources => '보조 자막';
+  @override
+  String get video_sentence_repeat_off => 'Current sentence repeat off';
+  @override
+  String get video_sentence_repeat_on => 'Current sentence repeat on';
   @override
   String get video_setting_auto_play_next => '다음 에피소드 자동 재생';
   @override
@@ -189016,6 +189076,9 @@ class _StringsNl extends _StringsEn {
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
       'Toggle Hide Secondary Subtitle';
   @override
+  String get shortcut_action_video_toggle_sentence_repeat =>
+      'Toggle current sentence repeat';
+  @override
   String get shortcut_action_video_toggle_shader_compare =>
       'Shadervergelijking in-/uitschakelen';
   @override
@@ -193701,6 +193764,10 @@ class _StringsNl extends _StringsEn {
   String get video_search_ai_recommended => 'AI-keuze';
   @override
   String get video_secondary_subtitle_sources => 'Secundaire ondertitel';
+  @override
+  String get video_sentence_repeat_off => 'Current sentence repeat off';
+  @override
+  String get video_sentence_repeat_on => 'Current sentence repeat on';
   @override
   String get video_setting_auto_play_next =>
       'Volgende aflevering automatisch afspelen';
@@ -209617,6 +209684,9 @@ class _StringsPtBr extends _StringsEn {
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
       'Toggle Hide Secondary Subtitle';
   @override
+  String get shortcut_action_video_toggle_sentence_repeat =>
+      'Toggle current sentence repeat';
+  @override
   String get shortcut_action_video_toggle_shader_compare =>
       'Alternar comparação de shaders';
   @override
@@ -214310,6 +214380,10 @@ class _StringsPtBr extends _StringsEn {
   String get video_search_ai_recommended => 'Escolha da IA';
   @override
   String get video_secondary_subtitle_sources => 'Legenda secundária';
+  @override
+  String get video_sentence_repeat_off => 'Current sentence repeat off';
+  @override
+  String get video_sentence_repeat_on => 'Current sentence repeat on';
   @override
   String get video_setting_auto_play_next =>
       'Reproduzir o próximo episódio automaticamente';
@@ -230200,6 +230274,9 @@ class _StringsRu extends _StringsEn {
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
       'Toggle Hide Secondary Subtitle';
   @override
+  String get shortcut_action_video_toggle_sentence_repeat =>
+      'Toggle current sentence repeat';
+  @override
   String get shortcut_action_video_toggle_shader_compare =>
       'Сравнение шейдеров';
   @override
@@ -234878,6 +234955,10 @@ class _StringsRu extends _StringsEn {
   String get video_search_ai_recommended => 'Выбор ИИ';
   @override
   String get video_secondary_subtitle_sources => 'Вторичные субтитры';
+  @override
+  String get video_sentence_repeat_off => 'Current sentence repeat off';
+  @override
+  String get video_sentence_repeat_on => 'Current sentence repeat on';
   @override
   String get video_setting_auto_play_next =>
       'Автовоспроизведение следующей серии';
@@ -250531,6 +250612,9 @@ class _StringsTh extends _StringsEn {
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
       'Toggle Hide Secondary Subtitle';
   @override
+  String get shortcut_action_video_toggle_sentence_repeat =>
+      'Toggle current sentence repeat';
+  @override
   String get shortcut_action_video_toggle_shader_compare =>
       'สลับเปรียบเทียบเชเดอร์';
   @override
@@ -255166,6 +255250,10 @@ class _StringsTh extends _StringsEn {
   String get video_search_ai_recommended => 'AI แนะนำ';
   @override
   String get video_secondary_subtitle_sources => 'คำบรรยายรอง';
+  @override
+  String get video_sentence_repeat_off => 'Current sentence repeat off';
+  @override
+  String get video_sentence_repeat_on => 'Current sentence repeat on';
   @override
   String get video_setting_auto_play_next => 'เล่นตอนถัดไปอัตโนมัติ';
   @override
@@ -270924,6 +271012,9 @@ class _StringsTr extends _StringsEn {
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
       'Toggle Hide Secondary Subtitle';
   @override
+  String get shortcut_action_video_toggle_sentence_repeat =>
+      'Toggle current sentence repeat';
+  @override
   String get shortcut_action_video_toggle_shader_compare =>
       'Shader Karşılaştırmasını Aç/Kapat';
   @override
@@ -275591,6 +275682,10 @@ class _StringsTr extends _StringsEn {
   String get video_search_ai_recommended => 'Yapay zeka seçimi';
   @override
   String get video_secondary_subtitle_sources => 'İkincil altyazı';
+  @override
+  String get video_sentence_repeat_off => 'Current sentence repeat off';
+  @override
+  String get video_sentence_repeat_on => 'Current sentence repeat on';
   @override
   String get video_setting_auto_play_next => 'Sonraki bölümü otomatik oynat';
   @override
@@ -291318,6 +291413,9 @@ class _StringsVi extends _StringsEn {
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
       'Toggle Hide Secondary Subtitle';
   @override
+  String get shortcut_action_video_toggle_sentence_repeat =>
+      'Toggle current sentence repeat';
+  @override
   String get shortcut_action_video_toggle_shader_compare =>
       'Bật/tắt so sánh shader';
   @override
@@ -295975,6 +296073,10 @@ class _StringsVi extends _StringsEn {
   String get video_search_ai_recommended => 'AI chọn';
   @override
   String get video_secondary_subtitle_sources => 'Phụ đề phụ';
+  @override
+  String get video_sentence_repeat_off => 'Current sentence repeat off';
+  @override
+  String get video_sentence_repeat_on => 'Current sentence repeat on';
   @override
   String get video_setting_auto_play_next => 'Tự phát tập tiếp theo';
   @override
@@ -310476,6 +310578,8 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get shortcut_action_video_toggle_secondary_subtitle_hide => '隐藏副字幕';
   @override
+  String get shortcut_action_video_toggle_sentence_repeat => '切换循环当前句子';
+  @override
   String get shortcut_action_video_toggle_shader_compare => '切换着色器对比';
   @override
   String get shortcut_action_video_toggle_subtitle_blur => '切换字幕模糊';
@@ -314743,6 +314847,10 @@ class _StringsZhCn extends _StringsEn {
   String get video_search_ai_recommended => 'AI 推荐';
   @override
   String get video_secondary_subtitle_sources => '副字幕';
+  @override
+  String get video_sentence_repeat_off => '已关闭当前句子循环';
+  @override
+  String get video_sentence_repeat_on => '已开启当前句子循环';
   @override
   String get video_setting_auto_play_next => '自动连播下一集';
   @override
@@ -329333,6 +329441,8 @@ class _StringsZhHk extends _StringsEn {
   String get shortcut_action_video_toggle_secondary_subtitle_hide =>
       'Toggle Hide Secondary Subtitle';
   @override
+  String get shortcut_action_video_toggle_sentence_repeat => '切換循環目前句子';
+  @override
   String get shortcut_action_video_toggle_shader_compare => '切換着色器對比';
   @override
   String get shortcut_action_video_toggle_subtitle_blur => '切換字幕模糊';
@@ -333745,6 +333855,10 @@ class _StringsZhHk extends _StringsEn {
   String get video_search_ai_recommended => 'AI 推薦';
   @override
   String get video_secondary_subtitle_sources => '副字幕';
+  @override
+  String get video_sentence_repeat_off => '已關閉目前句子循環';
+  @override
+  String get video_sentence_repeat_on => '已開啟目前句子循環';
   @override
   String get video_setting_auto_play_next => '自動連播下一集';
   @override
@@ -347194,6 +347308,8 @@ extension on _StringsEn {
         return 'Play / pause';
       case 'shortcut_action_video_toggle_secondary_subtitle_hide':
         return 'Toggle hide secondary subtitle';
+      case 'shortcut_action_video_toggle_sentence_repeat':
+        return 'Toggle current sentence repeat';
       case 'shortcut_action_video_toggle_shader_compare':
         return 'Toggle shader compare';
       case 'shortcut_action_video_toggle_subtitle_blur':
@@ -351263,6 +351379,10 @@ extension on _StringsEn {
         return 'AI pick';
       case 'video_secondary_subtitle_sources':
         return 'Secondary subtitle';
+      case 'video_sentence_repeat_off':
+        return 'Current sentence repeat off';
+      case 'video_sentence_repeat_on':
+        return 'Current sentence repeat on';
       case 'video_setting_auto_play_next':
         return 'Auto-play next episode';
       case 'video_setting_auto_scrape':
@@ -364586,6 +364706,8 @@ extension on _StringsAr {
         return 'تشغيل / إيقاف مؤقت';
       case 'shortcut_action_video_toggle_secondary_subtitle_hide':
         return 'Toggle Hide Secondary Subtitle';
+      case 'shortcut_action_video_toggle_sentence_repeat':
+        return 'Toggle current sentence repeat';
       case 'shortcut_action_video_toggle_shader_compare':
         return 'تبديل مقارنة المظلِّل';
       case 'shortcut_action_video_toggle_subtitle_blur':
@@ -368652,6 +368774,10 @@ extension on _StringsAr {
         return 'اختيار الذكاء الاصطناعي';
       case 'video_secondary_subtitle_sources':
         return 'ترجمة ثانوية';
+      case 'video_sentence_repeat_off':
+        return 'Current sentence repeat off';
+      case 'video_sentence_repeat_on':
+        return 'Current sentence repeat on';
       case 'video_setting_auto_play_next':
         return 'التشغيل التلقائي للحلقة التالية';
       case 'video_setting_auto_scrape':
@@ -382034,6 +382160,8 @@ extension on _StringsDe {
         return 'Wiedergabe / Pause';
       case 'shortcut_action_video_toggle_secondary_subtitle_hide':
         return 'Toggle Hide Secondary Subtitle';
+      case 'shortcut_action_video_toggle_sentence_repeat':
+        return 'Toggle current sentence repeat';
       case 'shortcut_action_video_toggle_shader_compare':
         return 'Shader-Vergleich umschalten';
       case 'shortcut_action_video_toggle_subtitle_blur':
@@ -386116,6 +386244,10 @@ extension on _StringsDe {
         return 'KI-Empfehlung';
       case 'video_secondary_subtitle_sources':
         return 'Sekundärer Untertitel';
+      case 'video_sentence_repeat_off':
+        return 'Current sentence repeat off';
+      case 'video_sentence_repeat_on':
+        return 'Current sentence repeat on';
       case 'video_setting_auto_play_next':
         return 'Nächste Folge automatisch abspielen';
       case 'video_setting_auto_scrape':
@@ -399486,6 +399618,8 @@ extension on _StringsEs {
         return 'Reproducir / Pausar';
       case 'shortcut_action_video_toggle_secondary_subtitle_hide':
         return 'Toggle Hide Secondary Subtitle';
+      case 'shortcut_action_video_toggle_sentence_repeat':
+        return 'Toggle current sentence repeat';
       case 'shortcut_action_video_toggle_shader_compare':
         return 'Alternar comparación de shaders';
       case 'shortcut_action_video_toggle_subtitle_blur':
@@ -403565,6 +403699,10 @@ extension on _StringsEs {
         return 'Elección de la IA';
       case 'video_secondary_subtitle_sources':
         return 'Subtítulo secundario';
+      case 'video_sentence_repeat_off':
+        return 'Current sentence repeat off';
+      case 'video_sentence_repeat_on':
+        return 'Current sentence repeat on';
       case 'video_setting_auto_play_next':
         return 'Reproducir automáticamente el siguiente episodio';
       case 'video_setting_auto_scrape':
@@ -416949,6 +417087,8 @@ extension on _StringsFr {
         return 'Lecture / Pause';
       case 'shortcut_action_video_toggle_secondary_subtitle_hide':
         return 'Toggle Hide Secondary Subtitle';
+      case 'shortcut_action_video_toggle_sentence_repeat':
+        return 'Toggle current sentence repeat';
       case 'shortcut_action_video_toggle_shader_compare':
         return 'Basculer la comparaison de shaders';
       case 'shortcut_action_video_toggle_subtitle_blur':
@@ -421031,6 +421171,10 @@ extension on _StringsFr {
         return 'Choix de l\'IA';
       case 'video_secondary_subtitle_sources':
         return 'Sous-titre secondaire';
+      case 'video_sentence_repeat_off':
+        return 'Current sentence repeat off';
+      case 'video_sentence_repeat_on':
+        return 'Current sentence repeat on';
       case 'video_setting_auto_play_next':
         return 'Lecture auto de l\'épisode suivant';
       case 'video_setting_auto_scrape':
@@ -434372,6 +434516,8 @@ extension on _StringsId {
         return 'Putar / Jeda';
       case 'shortcut_action_video_toggle_secondary_subtitle_hide':
         return 'Toggle Hide Secondary Subtitle';
+      case 'shortcut_action_video_toggle_sentence_repeat':
+        return 'Toggle current sentence repeat';
       case 'shortcut_action_video_toggle_shader_compare':
         return 'Alihkan Bandingkan Shader';
       case 'shortcut_action_video_toggle_subtitle_blur':
@@ -438442,6 +438588,10 @@ extension on _StringsId {
         return 'Pilihan AI';
       case 'video_secondary_subtitle_sources':
         return 'Subtitle sekunder';
+      case 'video_sentence_repeat_off':
+        return 'Current sentence repeat off';
+      case 'video_sentence_repeat_on':
+        return 'Current sentence repeat on';
       case 'video_setting_auto_play_next':
         return 'Putar otomatis episode berikutnya';
       case 'video_setting_auto_scrape':
@@ -451804,6 +451954,8 @@ extension on _StringsIt {
         return 'Riproduci / Pausa';
       case 'shortcut_action_video_toggle_secondary_subtitle_hide':
         return 'Toggle Hide Secondary Subtitle';
+      case 'shortcut_action_video_toggle_sentence_repeat':
+        return 'Toggle current sentence repeat';
       case 'shortcut_action_video_toggle_shader_compare':
         return 'Attiva/disattiva confronto shader';
       case 'shortcut_action_video_toggle_subtitle_blur':
@@ -455886,6 +456038,10 @@ extension on _StringsIt {
         return 'Scelta dell\'IA';
       case 'video_secondary_subtitle_sources':
         return 'Sottotitolo secondario';
+      case 'video_sentence_repeat_off':
+        return 'Current sentence repeat off';
+      case 'video_sentence_repeat_on':
+        return 'Current sentence repeat on';
       case 'video_setting_auto_play_next':
         return 'Riproduci automaticamente l\'episodio successivo';
       case 'video_setting_auto_scrape':
@@ -469170,6 +469326,8 @@ extension on _StringsJa {
         return '再生／一時停止';
       case 'shortcut_action_video_toggle_secondary_subtitle_hide':
         return 'Toggle Hide Secondary Subtitle';
+      case 'shortcut_action_video_toggle_sentence_repeat':
+        return 'Toggle current sentence repeat';
       case 'shortcut_action_video_toggle_shader_compare':
         return 'シェーダー比較の切り替え';
       case 'shortcut_action_video_toggle_subtitle_blur':
@@ -473212,6 +473370,10 @@ extension on _StringsJa {
         return 'AIのおすすめ';
       case 'video_secondary_subtitle_sources':
         return '副字幕';
+      case 'video_sentence_repeat_off':
+        return 'Current sentence repeat off';
+      case 'video_sentence_repeat_on':
+        return 'Current sentence repeat on';
       case 'video_setting_auto_play_next':
         return '次のエピソードを自動再生';
       case 'video_setting_auto_scrape':
@@ -486492,6 +486654,8 @@ extension on _StringsKo {
         return '재생 / 일시정지';
       case 'shortcut_action_video_toggle_secondary_subtitle_hide':
         return 'Toggle Hide Secondary Subtitle';
+      case 'shortcut_action_video_toggle_sentence_repeat':
+        return 'Toggle current sentence repeat';
       case 'shortcut_action_video_toggle_shader_compare':
         return '셰이더 비교 전환';
       case 'shortcut_action_video_toggle_subtitle_blur':
@@ -490540,6 +490704,10 @@ extension on _StringsKo {
         return 'AI 추천';
       case 'video_secondary_subtitle_sources':
         return '보조 자막';
+      case 'video_sentence_repeat_off':
+        return 'Current sentence repeat off';
+      case 'video_sentence_repeat_on':
+        return 'Current sentence repeat on';
       case 'video_setting_auto_play_next':
         return '다음 에피소드 자동 재생';
       case 'video_setting_auto_scrape':
@@ -503897,6 +504065,8 @@ extension on _StringsNl {
         return 'Afspelen / Pauzeren';
       case 'shortcut_action_video_toggle_secondary_subtitle_hide':
         return 'Toggle Hide Secondary Subtitle';
+      case 'shortcut_action_video_toggle_sentence_repeat':
+        return 'Toggle current sentence repeat';
       case 'shortcut_action_video_toggle_shader_compare':
         return 'Shadervergelijking in-/uitschakelen';
       case 'shortcut_action_video_toggle_subtitle_blur':
@@ -507972,6 +508142,10 @@ extension on _StringsNl {
         return 'AI-keuze';
       case 'video_secondary_subtitle_sources':
         return 'Secundaire ondertitel';
+      case 'video_sentence_repeat_off':
+        return 'Current sentence repeat off';
+      case 'video_sentence_repeat_on':
+        return 'Current sentence repeat on';
       case 'video_setting_auto_play_next':
         return 'Volgende aflevering automatisch afspelen';
       case 'video_setting_auto_scrape':
@@ -521333,6 +521507,8 @@ extension on _StringsPtBr {
         return 'Reproduzir / Pausar';
       case 'shortcut_action_video_toggle_secondary_subtitle_hide':
         return 'Toggle Hide Secondary Subtitle';
+      case 'shortcut_action_video_toggle_sentence_repeat':
+        return 'Toggle current sentence repeat';
       case 'shortcut_action_video_toggle_shader_compare':
         return 'Alternar comparação de shaders';
       case 'shortcut_action_video_toggle_subtitle_blur':
@@ -525406,6 +525582,10 @@ extension on _StringsPtBr {
         return 'Escolha da IA';
       case 'video_secondary_subtitle_sources':
         return 'Legenda secundária';
+      case 'video_sentence_repeat_off':
+        return 'Current sentence repeat off';
+      case 'video_sentence_repeat_on':
+        return 'Current sentence repeat on';
       case 'video_setting_auto_play_next':
         return 'Reproduzir o próximo episódio automaticamente';
       case 'video_setting_auto_scrape':
@@ -538773,6 +538953,8 @@ extension on _StringsRu {
         return 'Воспроизведение / Пауза';
       case 'shortcut_action_video_toggle_secondary_subtitle_hide':
         return 'Toggle Hide Secondary Subtitle';
+      case 'shortcut_action_video_toggle_sentence_repeat':
+        return 'Toggle current sentence repeat';
       case 'shortcut_action_video_toggle_shader_compare':
         return 'Сравнение шейдеров';
       case 'shortcut_action_video_toggle_subtitle_blur':
@@ -542845,6 +543027,10 @@ extension on _StringsRu {
         return 'Выбор ИИ';
       case 'video_secondary_subtitle_sources':
         return 'Вторичные субтитры';
+      case 'video_sentence_repeat_off':
+        return 'Current sentence repeat off';
+      case 'video_sentence_repeat_on':
+        return 'Current sentence repeat on';
       case 'video_setting_auto_play_next':
         return 'Автовоспроизведение следующей серии';
       case 'video_setting_auto_scrape':
@@ -556173,6 +556359,8 @@ extension on _StringsTh {
         return 'เล่น / หยุดชั่วคราว';
       case 'shortcut_action_video_toggle_secondary_subtitle_hide':
         return 'Toggle Hide Secondary Subtitle';
+      case 'shortcut_action_video_toggle_sentence_repeat':
+        return 'Toggle current sentence repeat';
       case 'shortcut_action_video_toggle_shader_compare':
         return 'สลับเปรียบเทียบเชเดอร์';
       case 'shortcut_action_video_toggle_subtitle_blur':
@@ -560240,6 +560428,10 @@ extension on _StringsTh {
         return 'AI แนะนำ';
       case 'video_secondary_subtitle_sources':
         return 'คำบรรยายรอง';
+      case 'video_sentence_repeat_off':
+        return 'Current sentence repeat off';
+      case 'video_sentence_repeat_on':
+        return 'Current sentence repeat on';
       case 'video_setting_auto_play_next':
         return 'เล่นตอนถัดไปอัตโนมัติ';
       case 'video_setting_auto_scrape':
@@ -573591,6 +573783,8 @@ extension on _StringsTr {
         return 'Oynat / Duraklat';
       case 'shortcut_action_video_toggle_secondary_subtitle_hide':
         return 'Toggle Hide Secondary Subtitle';
+      case 'shortcut_action_video_toggle_sentence_repeat':
+        return 'Toggle current sentence repeat';
       case 'shortcut_action_video_toggle_shader_compare':
         return 'Shader Karşılaştırmasını Aç/Kapat';
       case 'shortcut_action_video_toggle_subtitle_blur':
@@ -577664,6 +577858,10 @@ extension on _StringsTr {
         return 'Yapay zeka seçimi';
       case 'video_secondary_subtitle_sources':
         return 'İkincil altyazı';
+      case 'video_sentence_repeat_off':
+        return 'Current sentence repeat off';
+      case 'video_sentence_repeat_on':
+        return 'Current sentence repeat on';
       case 'video_setting_auto_play_next':
         return 'Sonraki bölümü otomatik oynat';
       case 'video_setting_auto_scrape':
@@ -591004,6 +591202,8 @@ extension on _StringsVi {
         return 'Phát / Tạm dừng';
       case 'shortcut_action_video_toggle_secondary_subtitle_hide':
         return 'Toggle Hide Secondary Subtitle';
+      case 'shortcut_action_video_toggle_sentence_repeat':
+        return 'Toggle current sentence repeat';
       case 'shortcut_action_video_toggle_shader_compare':
         return 'Bật/tắt so sánh shader';
       case 'shortcut_action_video_toggle_subtitle_blur':
@@ -595074,6 +595274,10 @@ extension on _StringsVi {
         return 'AI chọn';
       case 'video_secondary_subtitle_sources':
         return 'Phụ đề phụ';
+      case 'video_sentence_repeat_off':
+        return 'Current sentence repeat off';
+      case 'video_sentence_repeat_on':
+        return 'Current sentence repeat on';
       case 'video_setting_auto_play_next':
         return 'Tự phát tập tiếp theo';
       case 'video_setting_auto_scrape':
@@ -608278,6 +608482,8 @@ extension on _StringsZhCn {
         return '播放/暂停';
       case 'shortcut_action_video_toggle_secondary_subtitle_hide':
         return '隐藏副字幕';
+      case 'shortcut_action_video_toggle_sentence_repeat':
+        return '切换循环当前句子';
       case 'shortcut_action_video_toggle_shader_compare':
         return '切换着色器对比';
       case 'shortcut_action_video_toggle_subtitle_blur':
@@ -612289,6 +612495,10 @@ extension on _StringsZhCn {
         return 'AI 推荐';
       case 'video_secondary_subtitle_sources':
         return '副字幕';
+      case 'video_sentence_repeat_off':
+        return '已关闭当前句子循环';
+      case 'video_sentence_repeat_on':
+        return '已开启当前句子循环';
       case 'video_setting_auto_play_next':
         return '自动连播下一集';
       case 'video_setting_auto_scrape':
@@ -625512,6 +625722,8 @@ extension on _StringsZhHk {
         return '播放／暫停';
       case 'shortcut_action_video_toggle_secondary_subtitle_hide':
         return 'Toggle Hide Secondary Subtitle';
+      case 'shortcut_action_video_toggle_sentence_repeat':
+        return '切換循環目前句子';
       case 'shortcut_action_video_toggle_shader_compare':
         return '切換着色器對比';
       case 'shortcut_action_video_toggle_subtitle_blur':
@@ -629545,6 +629757,10 @@ extension on _StringsZhHk {
         return 'AI 推薦';
       case 'video_secondary_subtitle_sources':
         return '副字幕';
+      case 'video_sentence_repeat_off':
+        return '已關閉目前句子循環';
+      case 'video_sentence_repeat_on':
+        return '已開啟目前句子循環';
       case 'video_setting_auto_play_next':
         return '自動連播下一集';
       case 'video_setting_auto_scrape':

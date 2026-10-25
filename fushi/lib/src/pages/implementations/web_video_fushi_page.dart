@@ -679,7 +679,10 @@ class _WebVideoFushiPageState extends ConsumerState<WebVideoFushiPage>
     final bool changed = next != _activeTrackKey;
     _activeTrackKey = next;
     final WebVideoTrack? track = next == null ? null : _tracks[next];
-    _controller.setCues(track?.cues ?? const <AudioCue>[]);
+    _controller.setCues(
+      track?.cues ?? const <AudioCue>[],
+      preserveSentenceRepeat: !changed,
+    );
     final int? pos = _state?.positionMs;
     if (pos != null) _controller.updateCueForPosition(pos);
     // 窗口宿主档：页面 DOM 字幕层从 store 重读同一轨（live 轨边看边长也要跟）。
@@ -1566,6 +1569,9 @@ class _WebVideoFushiPageState extends ConsumerState<WebVideoFushiPage>
       toggleFavoriteSentence: () => unawaited(_toggleFavoriteCurrent()),
       copySubtitle: () => _copyCurrentSubtitles(secondary: false),
       copySecondarySubtitle: () => _copyCurrentSubtitles(secondary: true),
+      toggleSentenceRepeat: () => unawaited(
+        _controller.toggleSentenceRepeat(seek: _seekMs, play: _play),
+      ),
       replayCurrentSubtitle: () {
         final AudioCue? cue = _controller.currentCue ?? _lastLookupCue;
         if (cue != null) unawaited(_seekMs(cue.startMs));

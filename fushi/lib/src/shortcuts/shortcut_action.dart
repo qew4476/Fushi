@@ -289,7 +289,9 @@ enum ShortcutAction {
   readerLookupAtCursor(ShortcutScope.reader, 'reader_lookup_at_cursor'),
   readerShiftLookup(ShortcutScope.reader, 'reader_shift_lookup'),
   readerCreateCardFromPopup(
-      ShortcutScope.reader, 'reader_create_card_from_popup'),
+    ShortcutScope.reader,
+    'reader_create_card_from_popup',
+  ),
   // TODO-700 T7：「进入选字查词光标」可改键（默认手柄 A + 键盘 Enter）。这是
   // enter-trigger 的绑定真相源：reader 写死判 A/Enter 进光标的分支改读它的绑定
   // （见 reader_caret_router.isEnterTrigger*）。默认与旧硬编码一致，行为不变，只
@@ -401,7 +403,9 @@ enum ShortcutAction {
   // 鼠标中键点句 → 跳到该句并播放。位置型动作，运行时不走
   // _executeShortcutAction，而是 onPointerSeek 经 resolveMouse 判定后定位执行。
   audiobookSeekToClickedSentence(
-      ShortcutScope.audiobook, 'audiobook_seek_clicked_sentence'),
+    ShortcutScope.audiobook,
+    'audiobook_seek_clicked_sentence',
+  ),
 
   // Video player (TODO-134): migrated out of the hard-coded
   // buildVideoPlayerShortcuts map so they live in the remappable registry and
@@ -442,16 +446,27 @@ enum ShortcutAction {
 
   // 字幕/章节跳转
   videoCopySubtitle(ShortcutScope.video, 'video_copy_subtitle'),
-  videoCopySecondarySubtitle(ShortcutScope.video, 'video_copy_secondary_subtitle'),
+  videoCopySecondarySubtitle(
+    ShortcutScope.video,
+    'video_copy_secondary_subtitle',
+  ),
   videoPreviousSubtitle(ShortcutScope.video, 'video_previous_subtitle'),
   videoNextSubtitle(ShortcutScope.video, 'video_next_subtitle'),
+  videoToggleSentenceRepeat(
+    ShortcutScope.video,
+    'video_toggle_sentence_repeat',
+  ),
   videoReplayCurrentSubtitle(
-      ShortcutScope.video, 'video_replay_current_subtitle'),
+    ShortcutScope.video,
+    'video_replay_current_subtitle',
+  ),
   // 重播上一句（TODO-378，BUG-287）：纯句子跳转到上一条 cue 起点并播放，**不**退化成
   // 回退几秒。与 videoPreviousSubtitle（Ctrl+←，gap 太远时退化时间 seek，BUG-185/TODO-085）
   // 语义不同，是两个独立功能；TODO-328 误当重复删掉，此处恢复。
   videoReplayPreviousSubtitle(
-      ShortcutScope.video, 'video_replay_previous_subtitle'),
+    ShortcutScope.video,
+    'video_replay_previous_subtitle',
+  ),
   // 内封章节上/下一章（TODO-424，默认 PageUp / PageDown）：seek 到相邻章起点，无章节
   // 时 no-op。与「上/下一句字幕」(Ctrl+←/→) 正交——后者按字幕 cue，这里按容器章节。
   videoPreviousChapter(ShortcutScope.video, 'video_previous_chapter'),
@@ -467,15 +482,21 @@ enum ShortcutAction {
   // 主字幕」。与历史的 videoToggleSubtitleBlur（B，开/关模糊）正交并存——后者保留
   // 不破坏旧绑定（Never break userspace）。三者执行体都在 video_player_shortcuts。
   videoCycleSubtitleObscure(
-      ShortcutScope.video, 'video_cycle_subtitle_obscure'),
+    ShortcutScope.video,
+    'video_cycle_subtitle_obscure',
+  ),
   videoToggleSubtitleHide(ShortcutScope.video, 'video_toggle_subtitle_hide'),
   // TODO-1382：**副字幕**遮蔽三态（镜像主字幕，独立开关）。videoCycleSecondarySubtitleObscure
   // 循环 不遮蔽→模糊→隐藏（默认 Shift+G）；videoToggleSecondarySubtitleHide 直接开/关
   // 「隐藏副字幕」（默认 Shift+H）。执行体在 video_player_shortcuts。
   videoCycleSecondarySubtitleObscure(
-      ShortcutScope.video, 'video_cycle_secondary_subtitle_obscure'),
+    ShortcutScope.video,
+    'video_cycle_secondary_subtitle_obscure',
+  ),
   videoToggleSecondarySubtitleHide(
-      ShortcutScope.video, 'video_toggle_secondary_subtitle_hide'),
+    ShortcutScope.video,
+    'video_toggle_secondary_subtitle_hide',
+  ),
   // 手柄/键盘字级选词查词（对齐阅读器 readerEnterCaret）：进入后光标停在当前字幕
   // 首个可见字符，D-pad/方向键逐字移动、A/Enter 对光标字符查词（浮层内继续用手柄
   // 翻词条/跳词典/制卡）、B/Esc 退出。激活期的方向/确认/退出键在页面侧**先于**注册
@@ -505,9 +526,13 @@ enum ShortcutAction {
   // 在 video 独立 co-active 组内，默认键与既有视频键无冲突。
   videoOpenSubtitleAlign(ShortcutScope.video, 'video_open_subtitle_align'),
   videoSubtitleDelayIncrease(
-      ShortcutScope.video, 'video_subtitle_delay_increase'),
+    ShortcutScope.video,
+    'video_subtitle_delay_increase',
+  ),
   videoSubtitleDelayDecrease(
-      ShortcutScope.video, 'video_subtitle_delay_decrease'),
+    ShortcutScope.video,
+    'video_subtitle_delay_decrease',
+  ),
   // asbplayer 式「字幕偏移对齐」（用户请求，默认 Ctrl+Shift+←/→）：把上一句 / 下一句
   // 字幕的起点整体平移到当前播放时间点（按目标 cue 求**绝对**偏移，一键粗对齐整轨；与
   // z/x 的固定步进平移互补）。执行体走同一 _setDelayMs 写穿路径（clamp + 落盘 + OSD），
@@ -541,7 +566,9 @@ enum ShortcutAction {
   videoScreenshotSubtitled(ShortcutScope.video, 'video_screenshot_subtitled'),
   videoToggleShaderCompare(ShortcutScope.video, 'video_toggle_shader_compare'),
   videoToggleFavoriteSentence(
-      ShortcutScope.video, 'video_toggle_favorite_sentence'),
+    ShortcutScope.video,
+    'video_toggle_favorite_sentence',
+  ),
 
   // 漫画：翻页存的是**页序语义**（forward=下一页），左右方向键再按跨页方向
   // （日漫默认 rtl）校正——与 reader 的 resolveReaderArrowPageTurn 同构，见
@@ -666,34 +693,34 @@ enum ShortcutAction {
   /// 拒收表外按钮——通道级 gating 只管到「有没有鼠标这条路」，管不到按钮号，于是
   /// 会出现同一个病：**设置里能录、能保存、能回显，按下去什么都不发生**。
   Set<int>? get allowedMouseButtons => switch (this) {
-        // app 外全局查词是**不拦截**的（RawInput 只能监听），绑中键(1)/右键(2)等于
-        // 「查词 + 前台程序的原有动作同时发生」：右键会同时弹出上下文菜单、中键会
-        // 同时触发自动滚动。侧键 3/4 没有这种全系统级默认语义，是唯一能安全共存的
-        // 一对，消费侧（`GlobalLookupController._globalMouseTriggerButtons`）也只认
-        // 它俩——真相源在这里，那边读它。
-        ShortcutAction.globalExternalLookup => const <int>{3, 4},
-        _ => null,
-      };
+    // app 外全局查词是**不拦截**的（RawInput 只能监听），绑中键(1)/右键(2)等于
+    // 「查词 + 前台程序的原有动作同时发生」：右键会同时弹出上下文菜单、中键会
+    // 同时触发自动滚动。侧键 3/4 没有这种全系统级默认语义，是唯一能安全共存的
+    // 一对，消费侧（`GlobalLookupController._globalMouseTriggerButtons`）也只认
+    // 它俩——真相源在这里，那边读它。
+    ShortcutAction.globalExternalLookup => const <int>{3, 4},
+    _ => null,
+  };
 
   Set<ShortcutChannel> get channels => switch (this) {
-        // 右键菜单只有鼠标一条路：`ContextMenuTrigger` 只读鼠标通道，键盘兜底
-        // （`global_navigation.dart` 的 `_handleGlobalKey`）只认 globalToggleFullscreen、
-        // 其余一律 ignored，手柄同理。它继承 global 的 keyboard+gamepad 就是两条死通道，
-        // 而 Windows 键盘上有 Menu 键，用户几乎必然会去试着绑一下。
-        ShortcutAction.globalContextMenu => const <ShortcutChannel>{
-            ShortcutChannel.mouse,
-          },
-        // 「置顶并打开查词页」只有键盘一条路：执行体挂在 hotkey_manager 的 OS 热键
-        // 上（GlobalLookupController._osHotKeyActions），而本 scope 继承来的另外两条
-        // 通道各自只有**一个**消费者、且都只认 globalExternalLookup ——鼠标是 native
-        // RawInput 侧键触发（runner 侧只登记那一个按钮号），手柄是进程级单槽
-        // `GlobalExternalLookupRoute`。开着它俩就是两条死通道：设置里能录、能保存、
-        // 能回显，按下去什么都不发生。
-        ShortcutAction.globalExternalOpenLookupPage => const <ShortcutChannel>{
-            ShortcutChannel.keyboard,
-          },
-        _ => scope.channels,
-      };
+    // 右键菜单只有鼠标一条路：`ContextMenuTrigger` 只读鼠标通道，键盘兜底
+    // （`global_navigation.dart` 的 `_handleGlobalKey`）只认 globalToggleFullscreen、
+    // 其余一律 ignored，手柄同理。它继承 global 的 keyboard+gamepad 就是两条死通道，
+    // 而 Windows 键盘上有 Menu 键，用户几乎必然会去试着绑一下。
+    ShortcutAction.globalContextMenu => const <ShortcutChannel>{
+      ShortcutChannel.mouse,
+    },
+    // 「置顶并打开查词页」只有键盘一条路：执行体挂在 hotkey_manager 的 OS 热键
+    // 上（GlobalLookupController._osHotKeyActions），而本 scope 继承来的另外两条
+    // 通道各自只有**一个**消费者、且都只认 globalExternalLookup ——鼠标是 native
+    // RawInput 侧键触发（runner 侧只登记那一个按钮号），手柄是进程级单槽
+    // `GlobalExternalLookupRoute`。开着它俩就是两条死通道：设置里能录、能保存、
+    // 能回显，按下去什么都不发生。
+    ShortcutAction.globalExternalOpenLookupPage => const <ShortcutChannel>{
+      ShortcutChannel.keyboard,
+    },
+    _ => scope.channels,
+  };
 
   static ShortcutAction? fromKey(String key) {
     for (final action in values) {

@@ -581,6 +581,106 @@ class VideoPlayerController extends ChangeNotifier
   /// 位置，刚 seek 回起点时滞后的旧位置不会把它误判成「已到终点」。
   int? _oneShotHoldUntilMs;
 
+  AudioCue? _repeatingCue;
+  int _sentenceRepeatGeneration = 0;
+  bool _sentenceRepeatSeeking = false;
+  bool _sentenceRepeatCompleted = false;
+  Future<void> Function(int)? _sentenceRepeatExternalSeek;
+  Future<void> Function()? _sentenceRepeatExternalPlay;
+
+  bool get isRepeatingSentence => _repeatingCue != null;
+
+  /// Lock the current primary cue until explicitly disabled or the source changes.
+  /// External players supply transport callbacks but share the same seek protection.
+  Future<bool> toggleSentenceRepeat({
+    AudioCue? cue,
+    Future<void> Function(int)? seek,
+    Future<void> Function()? play,
+  }) async {
+    if (isRepeatingSentence) {
+      stopSentenceRepeat();
+      return false;
+    }
+    final AudioCue? target = cue ?? currentCue;
+    if (target == null ||
+        target.endMs <= target.startMs ||
+        _resolveCueIndex(target) == null) {
+      return false;
+    }
+    _oneShotHoldCueIndex = null;
+    _oneShotHoldUntilMs = null;
+    _repeatingCue = target;
+    _sentenceRepeatExternalSeek = seek;
+    _sentenceRepeatExternalPlay = play;
+    final int generation = ++_sentenceRepeatGeneration;
+    notifyListeners();
+    await _restartSentenceRepeat(generation, startPlayback: true);
+    return generation == _sentenceRepeatGeneration && isRepeatingSentence;
+  }
+
+  void stopSentenceRepeat({bool notify = true}) {
+    final bool wasActive = isRepeatingSentence;
+    _sentenceRepeatGeneration++;
+    _repeatingCue = null;
+    _sentenceRepeatSeeking = false;
+    _sentenceRepeatCompleted = false;
+    _sentenceRepeatExternalSeek = null;
+    _sentenceRepeatExternalPlay = null;
+    if (notify && wasActive) notifyListeners();
+  }
+
+  Future<void> _restartSentenceRepeat(
+    int generation, {
+    bool startPlayback = false,
+  }) async {
+    final AudioCue? cue = _repeatingCue;
+    if (cue == null || generation != _sentenceRepeatGeneration) return;
+    _sentenceRepeatSeeking = true;
+    try {
+      final int startMs = cueSeekTargetMs(
+        cueStartMs: cue.startMs,
+        delayMs: _delayMs,
+      ).clamp(0, 1 << 30);
+      final Future<void> Function(int)? externalSeek =
+          _sentenceRepeatExternalSeek;
+      late final Future<void> dispatched;
+      if (externalSeek == null) {
+        dispatched = seekMs(startMs);
+      } else {
+        notifyExternalSeek(startMs);
+        dispatched = _awaitSeekDispatch(
+          _pendingSeekToken,
+          externalSeek(startMs),
+        );
+      }
+      final int intentRevision = _remoteControlRevision;
+      await dispatched;
+      if (generation != _sentenceRepeatGeneration) return;
+      final bool completed = _sentenceRepeatCompleted;
+      _sentenceRepeatCompleted = false;
+      if (intentRevision != _remoteControlRevision && !completed) return;
+      if (startPlayback || completed) {
+        await (_sentenceRepeatExternalPlay ?? _replayPlayOverride ?? play)();
+      }
+    } finally {
+      if (generation == _sentenceRepeatGeneration) {
+        _sentenceRepeatSeeking = false;
+      }
+    }
+  }
+
+  bool _maybeRepeatSentence(int positionMs) {
+    final AudioCue? cue = _repeatingCue;
+    if (cue == null) return false;
+    if (_sentenceRepeatSeeking) return true;
+    if (!isPlaying ||
+        effectiveSubtitlePositionMs(positionMs, _delayMs) < cue.endMs) {
+      return false;
+    }
+    unawaited(_restartSentenceRepeat(_sentenceRepeatGeneration));
+    return true;
+  }
+
   /// 当前启用的 mpv 着色器绝对路径（[load] 复用 / [applyShaders] 实时切换）。
   List<String> _shaderPaths = <String>[];
 
@@ -2423,7 +2523,18 @@ class VideoPlayerController extends ChangeNotifier
 
   /// 设置 cue 列表：拷贝并按 startMs 升序排序（[JsonAlignmentParser.findCueIndex]
   /// 要求升序），重置当前 cue 状态。
-  void setCues(List<AudioCue> cues) {
+  void setCues(List<AudioCue> cues, {bool preserveSentenceRepeat = false}) {
+    final AudioCue? repeating = _repeatingCue;
+    final bool keepRepeat =
+        preserveSentenceRepeat &&
+        repeating != null &&
+        cues.any(
+          (AudioCue cue) =>
+              cue.startMs == repeating.startMs &&
+              cue.endMs == repeating.endMs &&
+              cue.text == repeating.text,
+        );
+    if (!keepRepeat) stopSentenceRepeat(notify: false);
     // 外部换字幕源（加载文件 / 关字幕 / 换片 / 选图形轨）一律结束 mpv 解码回流，
     // 否则迟到的 sub-text 会把旧轨的句子插进新 cue 列表。
     _stopPlayerDecodedText();
@@ -3013,6 +3124,7 @@ class VideoPlayerController extends ChangeNotifier
       (videoFile == null) != (mediaUri == null),
       'Provide exactly one of videoFile or mediaUri.',
     );
+    stopSentenceRepeat();
     final int loadToken = ++_loadToken;
     _resetDiscMenu();
     if (openBlurayMenu) {
@@ -3904,6 +4016,18 @@ class VideoPlayerController extends ChangeNotifier
   void _handleCompletedChanged(bool completed) {
     if (isBlurayNavigationSession) return;
     if (!completed) return;
+    if (isRepeatingSentence) {
+      _sentenceRepeatCompleted = true;
+      if (!_sentenceRepeatSeeking) {
+        unawaited(
+          _restartSentenceRepeat(
+            _sentenceRepeatGeneration,
+            startPlayback: true,
+          ),
+        );
+      }
+      return;
+    }
     if (_completedFiredForLoad) return;
     _completedFiredForLoad = true;
     _onCompleted?.call();
@@ -4035,6 +4159,7 @@ class VideoPlayerController extends ChangeNotifier
     // 普通 seek 在途：把 tick 读到的滞后旧 position 调和成跳转目标位置（见
     // [_plainSeekTargetMs] / [_reconcileSeekInFlightPosition]），避免旧字幕被反复确认。
     final int reconciledMs = _reconcileSeekInFlightPosition(posMs);
+    if (_maybeRepeatSentence(reconciledMs)) return;
     _maybeStopAtPlayRangeEnd(reconciledMs);
     _syncCueForPosition(reconciledMs, persistPosition: true);
   }
@@ -4853,6 +4978,7 @@ class VideoPlayerController extends ChangeNotifier
   bool? _commandedPlaying;
 
   void _notePlaybackIntent(bool? targetPlaying) {
+    if (targetPlaying == false) _sentenceRepeatCompleted = false;
     if (!_automaticSubtitleEndHold) _remoteControlRevision++;
     _commandedPlaying = targetPlaying;
   }
@@ -5708,6 +5834,7 @@ class VideoPlayerController extends ChangeNotifier
   /// [until] 非空时从 [cue] 句首一直播到 [until] 句尾才停（制卡「调整上下文」试听
   /// 多句合并区间用）：一次性 hold 挂在 [until] 上，中间各句照常走过。
   Future<void> replayCue(AudioCue cue, {AudioCue? until}) async {
+    stopSentenceRepeat();
     // 先 seek（内部 [_rawSeekMs] 会清掉上一次的一次性 hold），再置本次目标——顺序与
     // [skipToCue] 置 [_seekTargetCueIndex] 同构，故绝不会被自清。
     await skipToCue(cue);
@@ -5736,6 +5863,7 @@ class VideoPlayerController extends ChangeNotifier
   /// 顺序与 [replayCue] 同构：先 [seekMs]（它会作废上一次的一次性 hold），再挂本次
   /// 终点，再起播。用户中途 seek / 换片即放弃；[stopPlayRange] 显式停止。
   Future<void> playRangeMs(int startMs, int endMs) async {
+    stopSentenceRepeat();
     if (endMs <= startMs) return;
     await seekMs(startMs);
     _oneShotHoldUntilMs = endMs;
@@ -6107,6 +6235,7 @@ class VideoPlayerController extends ChangeNotifier
 
   @override
   void dispose() {
+    stopSentenceRepeat(notify: false);
     _loadToken++;
     _discJavaRuntimeProbe?.cancel();
     _discJavaRuntimeProbe = null;

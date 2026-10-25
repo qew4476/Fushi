@@ -171,6 +171,7 @@ VideoPlayerShortcutActions _actions(List<String> log) {
     toggleFavoriteSentence: () => record('toggleFavoriteSentence'),
     copySubtitle: () {},
     copySecondarySubtitle: () {},
+    toggleSentenceRepeat: () {},
     replayCurrentSubtitle: () => record('replayCurrentSubtitle'),
     replayPreviousSubtitle: () => record('replayPreviousSubtitle'),
     previousChapter: () => record('previousChapter'),

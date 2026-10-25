@@ -172,6 +172,8 @@ extension ShortcutActionLabel on ShortcutAction {
         return t.shortcut_action_video_toggle_secondary_subtitle_hide;
       case ShortcutAction.videoToggleFavoriteSentence:
         return t.shortcut_action_video_toggle_favorite_sentence;
+      case ShortcutAction.videoToggleSentenceRepeat:
+        return t.shortcut_action_video_toggle_sentence_repeat;
       case ShortcutAction.videoReplayCurrentSubtitle:
         return t.shortcut_action_video_replay_current_subtitle;
       case ShortcutAction.videoReplayPreviousSubtitle:
@@ -374,6 +376,8 @@ extension ShortcutActionIcon on ShortcutAction {
         return FushiIcons.skipPrevious;
       case ShortcutAction.videoNextSubtitle:
         return FushiIcons.skipNext;
+      case ShortcutAction.videoToggleSentenceRepeat:
+        return FushiIcons.replay;
       case ShortcutAction.videoReplayCurrentSubtitle:
         return FushiIcons.replay;
       case ShortcutAction.videoReplayPreviousSubtitle:

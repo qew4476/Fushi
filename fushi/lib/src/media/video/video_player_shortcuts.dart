@@ -98,6 +98,7 @@ class VideoPlayerShortcutActions {
     required this.toggleFavoriteSentence,
     required this.copySubtitle,
     required this.copySecondarySubtitle,
+    required this.toggleSentenceRepeat,
     required this.replayCurrentSubtitle,
     required this.replayPreviousSubtitle,
     required this.previousChapter,
@@ -180,6 +181,7 @@ class VideoPlayerShortcutActions {
   final VoidCallback toggleFavoriteSentence;
   final VoidCallback copySubtitle;
   final VoidCallback copySecondarySubtitle;
+  final VoidCallback toggleSentenceRepeat;
   final VoidCallback replayCurrentSubtitle;
 
   /// 重播上一句（TODO-378，BUG-287）：纯句子跳转到上一条 cue 起点并播放，不退化回退。
@@ -247,6 +249,7 @@ const List<ShortcutAction> kVideoAssignableActions = <ShortcutAction>[
   ShortcutAction.videoNextSubtitle,
   ShortcutAction.videoCopySubtitle,
   ShortcutAction.videoCopySecondarySubtitle,
+  ShortcutAction.videoToggleSentenceRepeat,
   ShortcutAction.videoReplayCurrentSubtitle,
   ShortcutAction.videoReplayPreviousSubtitle,
   // 章节
@@ -328,6 +331,7 @@ Map<ShortcutAction, VoidCallback> videoActionCallbacks(
     ShortcutAction.videoToggleFavoriteSentence: actions.toggleFavoriteSentence,
     ShortcutAction.videoCopySubtitle: actions.copySubtitle,
     ShortcutAction.videoCopySecondarySubtitle: actions.copySecondarySubtitle,
+    ShortcutAction.videoToggleSentenceRepeat: actions.toggleSentenceRepeat,
     ShortcutAction.videoReplayCurrentSubtitle: actions.replayCurrentSubtitle,
     ShortcutAction.videoReplayPreviousSubtitle: actions.replayPreviousSubtitle,
     ShortcutAction.videoPreviousChapter: actions.previousChapter,

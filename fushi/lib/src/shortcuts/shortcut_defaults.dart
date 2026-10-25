@@ -441,6 +441,9 @@ class ShortcutDefaults {
     ShortcutAction.videoCopySecondarySubtitle: _kb([
       _key(LogicalKeyboardKey.keyC, {ModifierKey.ctrl, ModifierKey.shift}),
     ]),
+    ShortcutAction.videoToggleSentenceRepeat: _kb([
+      _key(LogicalKeyboardKey.keyR, {ModifierKey.ctrl}),
+    ]),
     ShortcutAction.videoReplayCurrentSubtitle: _kb(
       [_key(LogicalKeyboardKey.keyR)],
       [_gLT],
