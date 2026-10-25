@@ -1,11 +1,12 @@
 [CmdletBinding()]
 param(
-    [ValidateSet('setup','dev','build','release','help')][string]$Command = 'help',
+    [ValidateSet('setup','dev','build','release','publish','help')][string]$Command = 'help',
     [string]$Tag,
     [string]$VcpkgRoot = $env:VCPKG_ROOT
 )
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
+. (Join-Path $PSScriptRoot 'local_windows_release.ps1')
 function Invoke-Checked {
     param([string]$Exe, [string[]]$Arguments)
     & $Exe @Arguments
@@ -16,7 +17,8 @@ function Invoke-Script {
     Invoke-Checked 'powershell' (@('-NoProfile','-ExecutionPolicy','Bypass','-File',(Join-Path $root $Path)) + $Arguments)
 }
 if ($Command -eq 'help') {
-    Write-Host '.\fushi setup | dev | build | release [-Tag local-windows-X.Y.Z.N]'
+    Write-Host '.\fushi setup | dev | build | release | publish [-Tag local-windows-X.Y.Z.N]'
+    Write-Host 'release builds then uploads; publish uploads the existing verified installer without rebuilding.'
     exit 0
 }
 Push-Location $root
@@ -24,6 +26,14 @@ try {
     if ($Command -eq 'setup') {
         Invoke-Script 'tool/setup_local_windows.ps1'
         exit 0
+    }
+    if ($Command -in @('release', 'publish')) {
+        $releaseRepository = Get-LocalReleaseRepository -RepositoryRoot $root
+        Write-Host "Release repository: $releaseRepository (origin)"
+        if ($Command -eq 'publish') {
+            Publish-LocalWindowsInstaller -RepositoryRoot $root -Repository $releaseRepository -Tag $Tag
+            exit 0
+        }
     }
     $version = (Get-Content (Join-Path $root 'fushi/.fvmrc') -Raw | ConvertFrom-Json).flutter
     if (-not $env:FUSHI_FLUTTER) {
@@ -43,25 +53,7 @@ try {
         $buildArguments = @('-Command','build')
         if ($VcpkgRoot) { $buildArguments += @('-VcpkgRoot',$VcpkgRoot) }
         Invoke-Script 'tool/local_windows.ps1' $buildArguments
-        if (-not (Test-Path $manifestPath)) { throw 'Build completed without build.json; refusing to upload.' }
-        $m = Get-Content $manifestPath -Raw | ConvertFrom-Json
-        $installer = Join-Path $out $m.file
-        if ((Get-FileHash $installer -Algorithm SHA256).Hash -ne $m.sha256) { throw 'Installer checksum differs from build.json.' }
-        if (-not $Tag) { $Tag = "local-windows-$($m.version)" }
-        if ($Tag -notmatch '^local-windows-[A-Za-z0-9._-]+$') { throw 'Use a local-windows- tag to avoid triggering the multi-platform release workflows.' }
-        # Resolve this checkout's repository; never publish to the upstream by accident.
-        $repo = (& gh repo view --json nameWithOwner --jq .nameWithOwner | Out-String).Trim()
-        if ($LASTEXITCODE -ne 0 -or -not $repo) { throw 'GitHub repository lookup failed. Run gh auth login.' }
-        Invoke-Checked 'git' @('fetch','origin','--quiet')
-        $remoteRefs = @(& git branch -r --contains $m.commit)
-        if ($LASTEXITCODE -ne 0 -or $remoteRefs.Count -eq 0) { throw 'Build commit must be pushed before publishing.' }
-        $previousPreference = $ErrorActionPreference
-        $ErrorActionPreference = 'Continue'
-        try { & gh release view $Tag --repo $repo *> $null; $releaseExists = $LASTEXITCODE -eq 0 }
-        finally { $ErrorActionPreference = $previousPreference }
-        if ($releaseExists) { throw "Release $Tag already exists; use a new tag (assets are never overwritten)." }
-        Invoke-Checked 'gh' @('release','create',$Tag,$installer,"$installer.sha256",'--repo',$repo,'--target',$m.commit,'--title',"Fushi $($m.version) Windows",'--notes','Locally built Windows installer (unsigned).','--prerelease','--latest=false')
-        Invoke-Checked 'gh' @('release','view',$Tag,'--repo',$repo,'--json','url,assets')
+        Publish-LocalWindowsInstaller -RepositoryRoot $root -Repository $releaseRepository -Tag $Tag
         exit 0
     }
     Invoke-Script 'tool/bootstrap.ps1'
@@ -121,6 +113,6 @@ try {
     $fileName = "fushi-$buildVersion-windows-setup.exe"
     $hash = (Get-FileHash (Join-Path $out $fileName) -Algorithm SHA256).Hash
     "$hash  $fileName" | Set-Content (Join-Path $out "$fileName.sha256") -Encoding ASCII
-    @{version=$buildVersion;commit=$commit;file=$fileName;sha256=$hash} | ConvertTo-Json | Set-Content $manifestPath -Encoding UTF8
+    @{version=$buildVersion;commit=$commit;sourceRepo=$env:FUSHI_SOURCE_REPO;file=$fileName;sha256=$hash} | ConvertTo-Json | Set-Content $manifestPath -Encoding UTF8
     Write-Host "Installer: $(Join-Path $out $fileName)"
 } finally { Pop-Location }
