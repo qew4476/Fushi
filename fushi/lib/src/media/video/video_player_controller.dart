@@ -5692,6 +5692,16 @@ class VideoPlayerController extends ChangeNotifier
   /// 相对当前位置 seek（±[deltaMs]，如 ±10 秒），clamp 到 [0, duration]。
   /// 未 load（无位置）时 no-op 安全。
   Future<void> seekRelative(int deltaMs) async {
+    // In sentence-repeat mode, directional transport moves the loop itself.
+    // A time seek would leave the old cue locked and bounce back at its end.
+    if (isRepeatingSentence && deltaMs != 0) {
+      if (deltaMs > 0) {
+        await skipToNextCue();
+      } else {
+        await skipToPrevCue();
+      }
+      return;
+    }
     // 用户主动相对 seek 是「离开当前跳转目标」的明确意图：立刻作废主动跳转快照 + 在途
     // seek 宽限，让下个 tick 按真实位置纯推导高亮，不被旧 [skipToCue] 目标误 snap
     // （TODO-565：手动 seek 与 skipToCue 不同路径，手动 seek 仍能清快照）。
@@ -6050,7 +6060,7 @@ class VideoPlayerController extends ChangeNotifier
       positionMs: effectiveSubtitleClockMs,
       seekSeconds: seekSeconds,
       anchorIndex: _seekTargetCueIndex,
-      degradeFarCueToTimeSeek: degradeFarCueToTimeSeek,
+      degradeFarCueToTimeSeek: degradeFarCueToTimeSeek && !isRepeatingSentence,
     );
     if (decision.cueIndex != null) {
       await skipToCue(_cues[decision.cueIndex!]);

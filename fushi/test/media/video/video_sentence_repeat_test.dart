@@ -105,6 +105,70 @@ void main() {
     expect(seeks, <int>[1000, 3000]);
   });
 
+  test(
+    'bare right-arrow transport moves and repeats the next sentence',
+    () async {
+      await toggle();
+      await tick(1000);
+      await controller.seekRelative(3000);
+      await tick(1500); // A stale position from before the navigation.
+      await tick(3000);
+      await tick(4000);
+      expect(seeks, <int>[1000, 3000]);
+      await tick(3000);
+      await tick(4000);
+      expect(seeks, <int>[1000, 3000, 3000]);
+      expect(controller.isRepeatingSentence, isTrue);
+    },
+  );
+
+  test(
+    'bare left-arrow transport loops the previous sentence immediately',
+    () async {
+      await tick(3500);
+      await toggle();
+      await tick(3000);
+      await controller.seekRelative(-3000);
+      await tick(1000);
+      await tick(2000);
+      expect(seeks, <int>[3000, 1000]);
+      await tick(1000);
+      await tick(2000);
+      expect(seeks, <int>[3000, 1000, 1000]);
+    },
+  );
+
+  test(
+    'Ctrl-left does not degrade a distant loop target to a time seek',
+    () async {
+      controller.setCues(<AudioCue>[_cue(1000, 2000), _cue(10000, 11000)]);
+      await tick(10500);
+      await toggle();
+      await tick(10000);
+      await controller.skipToPrevCueOrSeekBack(
+        seekSeconds: 3,
+        degradeFarCueToTimeSeek: true,
+      );
+      expect(controller.debugSeekTargetCueIndex, 0);
+      await tick(1000);
+      await tick(2000);
+      expect(seeks, <int>[10000, 1000]);
+    },
+  );
+
+  test(
+    'right-arrow transport after disabling repeat keeps time-seek semantics',
+    () async {
+      await toggle();
+      await tick(1000);
+      await toggle();
+      await controller.seekRelative(3000);
+      expect(controller.isRepeatingSentence, isFalse);
+      expect(controller.debugSeekTargetCueIndex, isNull);
+      expect(controller.resumePositionMs, 4000);
+    },
+  );
+
   test('paused playback does not seek at the sentence end', () async {
     await toggle();
     await tick(1000);
