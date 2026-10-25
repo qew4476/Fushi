@@ -90,6 +90,8 @@ try {
     $env:FUSHI_SOURCE_COMMIT = $commit
     $buildVersion = "$appVersion-local.$($commit.Substring(0,10))"
     $bundle = Join-Path $root 'fushi/build/windows/x64/runner/Release'
+    Invoke-Checked $flutter @('precache','--windows')
+    Invoke-Script 'tool/prepare_windows_aot.ps1' @('-FlutterRoot',(Split-Path -Parent (Split-Path -Parent $flutter)))
     Push-Location (Join-Path $root 'fushi')
     try { Invoke-Checked $dart @('tool/heavy.dart','--',$flutter,'build','windows','--release','--no-pub','--build-name',$appVersion,"--dart-define=FUSHI_BUILD_VERSION=$buildVersion") }
     finally { Pop-Location }
