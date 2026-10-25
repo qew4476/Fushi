@@ -7,6 +7,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
+. (Join-Path $PSScriptRoot "verified_archive.ps1")
 
 # 上游 miru-project/M-Extension-Server 已从 GitHub 消失（404），原先的 `git clone`
 # 会转去交互取凭据并以 exit 128 挂掉整个 job。源码按 MPL-2.0 vendored 进
@@ -106,14 +107,9 @@ try {
     }
     Copy-Tree (Join-Path $jogampRepo "org") (Join-Path $sourceRoot "fushi-offline-maven\jogamp\org")
 
-    $archivePath = Join-Path $resolvedCache $temurinArchive
-    if (-not (Test-Path -LiteralPath $archivePath)) {
-        Invoke-WebRequest -Uri $temurinUrl -OutFile $archivePath
-    }
-    $actualSha256 = (Get-FileHash -LiteralPath $archivePath -Algorithm SHA256).Hash.ToLowerInvariant()
-    if ($actualSha256 -ne $temurinSha256) {
-        throw "Temurin archive checksum mismatch: expected $temurinSha256, got $actualSha256"
-    }
+    $archivePath = Join-Path $workingRoot $temurinArchive
+    Get-VerifiedArchive -Uri $temurinUrl -CachePath (Join-Path $resolvedCache $temurinArchive) `
+        -Destination $archivePath -Sha256 $temurinSha256
 
     $jdkExtractRoot = Join-Path $workingRoot "jdk"
     Expand-Archive -LiteralPath $archivePath -DestinationPath $jdkExtractRoot
