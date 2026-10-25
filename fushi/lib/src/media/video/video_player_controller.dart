@@ -590,6 +590,11 @@ class VideoPlayerController extends ChangeNotifier
 
   bool get isRepeatingSentence => _repeatingCue != null;
 
+  int? get _sentenceNavigationAnchorIndex {
+    final AudioCue? cue = _repeatingCue;
+    return cue == null ? _seekTargetCueIndex : _resolveCueIndex(cue);
+  }
+
   /// Repeat the primary cue until disabled; explicit cue navigation moves the loop.
   /// External players supply transport callbacks but share the same seek protection.
   Future<bool> toggleSentenceRepeat({
@@ -5692,16 +5697,6 @@ class VideoPlayerController extends ChangeNotifier
   /// 相对当前位置 seek（±[deltaMs]，如 ±10 秒），clamp 到 [0, duration]。
   /// 未 load（无位置）时 no-op 安全。
   Future<void> seekRelative(int deltaMs) async {
-    // In sentence-repeat mode, directional transport moves the loop itself.
-    // A time seek would leave the old cue locked and bounce back at its end.
-    if (isRepeatingSentence && deltaMs != 0) {
-      if (deltaMs > 0) {
-        await skipToNextCue();
-      } else {
-        await skipToPrevCue();
-      }
-      return;
-    }
     // 用户主动相对 seek 是「离开当前跳转目标」的明确意图：立刻作废主动跳转快照 + 在途
     // seek 宽限，让下个 tick 按真实位置纯推导高亮，不被旧 [skipToCue] 目标误 snap
     // （TODO-565：手动 seek 与 skipToCue 不同路径，手动 seek 仍能清快照）。
@@ -5806,17 +5801,14 @@ class VideoPlayerController extends ChangeNotifier
     // snap 回目标句，消除「点第 N 行高亮 N-1」。解析不到下标（cue 不在 _cues）时为 null，
     // 退回纯位置推导。**在 seek 之前先算好**，避免下面 await 期间 _cues 被异步改写。
     final int? targetIndex = _resolveCueIndex(cue);
-    // Move the active loop before seeking and invalidate old async loop callbacks.
-    final int? repeatGeneration;
     if (isRepeatingSentence && targetIndex != null && cue.endMs > cue.startMs) {
       _repeatingCue = cue;
-      repeatGeneration = ++_sentenceRepeatGeneration;
-      _sentenceRepeatSeeking = true;
+      final int generation = ++_sentenceRepeatGeneration;
       _sentenceRepeatCompleted = false;
-    } else {
-      repeatGeneration = null;
+      // Both directions share the loop transport and its seek landing protection.
+      await _restartSentenceRepeat(generation);
+      return;
     }
-
     // **顺序关键（TODO-565 复核退回的必修项）**：先 await [_rawSeekMs] 发出 seek——它开头
     // 会把**上一个**主动跳转快照清掉（统一清除点），故本句快照必须在它**之后**才置，否则会被
     // 自清成 off-by-one 又复发。await 与同步置快照在单线程事件循环里对后续 tick 等价可见
@@ -5828,18 +5820,7 @@ class VideoPlayerController extends ChangeNotifier
       preRollMs: kCueSeekPreRollMs,
       prevCueStartMs: _prevCueStartMsBefore(cue.startMs),
     ).clamp(0, 1 << 30);
-    try {
-      await _rawSeekMs(landingMs);
-    } finally {
-      if (repeatGeneration != null &&
-          repeatGeneration == _sentenceRepeatGeneration) {
-        _sentenceRepeatSeeking = false;
-      }
-    }
-    if (repeatGeneration != null &&
-        repeatGeneration != _sentenceRepeatGeneration) {
-      return;
-    }
+    await _rawSeekMs(landingMs);
     _seekTargetCueIndex = targetIndex;
     // 充满在途 seek 宽限（TODO-565 复核退回的真机时序）：异步 seek 落地前 tick 会先读到
     // 旧 position，宽限让快照撑到落点，避免在途 stale tick 把快照提前清掉 → off-by-one。
@@ -6011,7 +5992,7 @@ class VideoPlayerController extends ChangeNotifier
     final int? next = nextCueIndexFor(
       cues: _cues,
       positionMs: effectiveSubtitleClockMs,
-      anchorIndex: _seekTargetCueIndex,
+      anchorIndex: _sentenceNavigationAnchorIndex,
     );
     if (next == null) return;
     await skipToCue(_cues[next]);
@@ -6030,7 +6011,7 @@ class VideoPlayerController extends ChangeNotifier
     final int? prev = prevCueIndexFor(
       cues: _cues,
       positionMs: effectiveSubtitleClockMs,
-      anchorIndex: _seekTargetCueIndex,
+      anchorIndex: _sentenceNavigationAnchorIndex,
     );
     if (prev == null) return;
     await skipToCue(_cues[prev]);
@@ -6059,7 +6040,7 @@ class VideoPlayerController extends ChangeNotifier
       cues: _cues,
       positionMs: effectiveSubtitleClockMs,
       seekSeconds: seekSeconds,
-      anchorIndex: _seekTargetCueIndex,
+      anchorIndex: _sentenceNavigationAnchorIndex,
       degradeFarCueToTimeSeek: degradeFarCueToTimeSeek && !isRepeatingSentence,
     );
     if (decision.cueIndex != null) {
@@ -6092,7 +6073,7 @@ class VideoPlayerController extends ChangeNotifier
     final int? next = nextCueIndexFor(
       cues: _cues,
       positionMs: effectiveSubtitleClockMs,
-      anchorIndex: _seekTargetCueIndex,
+      anchorIndex: _sentenceNavigationAnchorIndex,
     );
     // next == null：已在末句之后，无下一句 → 保持 no-op（不前进越过片尾，避免误跳到结尾）。
     if (next == null) return;

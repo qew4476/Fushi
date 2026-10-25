@@ -66,14 +66,14 @@ void main() {
     expect(controller.isRepeatingSentence, isTrue);
     await tick(3000);
     await tick(4000);
-    expect(seeks, <int>[1000, 3000]);
+    expect(seeks, <int>[1000, 3000, 3000]);
     await tick(3000);
     await tick(4100);
-    expect(seeks, <int>[1000, 3000, 3000]);
+    expect(seeks, <int>[1000, 3000, 3000, 3000]);
     expect(await toggle(), isFalse);
     await tick(3000);
     await tick(4100);
-    expect(seeks, hasLength(3));
+    expect(seeks, hasLength(4));
   });
 
   test('selecting a previous sentence moves the loop back', () async {
@@ -83,7 +83,7 @@ void main() {
     await controller.skipToPrevCue();
     await tick(1000);
     await tick(2000);
-    expect(seeks, <int>[3000, 1000]);
+    expect(seeks, <int>[3000, 1000, 1000]);
     expect(controller.isRepeatingSentence, isTrue);
   });
 
@@ -102,39 +102,78 @@ void main() {
     expect(plays, 0);
     await tick(3000);
     await tick(4000);
-    expect(seeks, <int>[1000, 3000]);
+    expect(seeks, <int>[1000, 3000, 3000]);
+  });
+
+  test('bare arrows retain time seeks while repeat is enabled', () async {
+    await tick(3500);
+    await toggle();
+    await tick(3000);
+    await controller.seekRelative(-1000);
+    expect(controller.resumePositionMs, 2000);
+    expect(controller.debugSeekTargetCueIndex, isNull);
+    expect(controller.isRepeatingSentence, isTrue);
+    await controller.seekRelative(500);
+    expect(controller.resumePositionMs, 2500);
+    expect(controller.debugSeekTargetCueIndex, isNull);
+    await tick(2500);
+    await tick(4000);
+    expect(seeks, <int>[3000, 3000]);
   });
 
   test(
-    'bare right-arrow transport moves and repeats the next sentence',
+    'Ctrl-left changes loop despite stale ticks from the later sentence',
     () async {
+      controller.setCues(<AudioCue>[
+        _cue(1000, 2000),
+        _cue(5000, 6000),
+        _cue(10000, 11000),
+      ]);
+      await tick(10500);
       await toggle();
-      await tick(1000);
-      await controller.seekRelative(3000);
-      await tick(1500); // A stale position from before the navigation.
-      await tick(3000);
-      await tick(4000);
-      expect(seeks, <int>[1000, 3000]);
-      await tick(3000);
-      await tick(4000);
-      expect(seeks, <int>[1000, 3000, 3000]);
-      expect(controller.isRepeatingSentence, isTrue);
+      await tick(10000);
+      await controller.skipToPrevCueOrSeekBack(
+        seekSeconds: 3,
+        degradeFarCueToTimeSeek: true,
+      );
+      await tick(10500);
+      await tick(5000);
+      await tick(6000);
+      expect(seeks, <int>[10000, 5000, 5000]);
+      await tick(5000);
+      await tick(6000);
+      expect(seeks, <int>[10000, 5000, 5000, 5000]);
     },
   );
 
   test(
-    'bare left-arrow transport loops the previous sentence immediately',
+    'repeated Ctrl-left follows loop targets before position catches up',
     () async {
-      await tick(3500);
+      controller.setCues(<AudioCue>[
+        _cue(1000, 2000),
+        _cue(5000, 6000),
+        _cue(10000, 11000),
+      ]);
+      await tick(10500);
       await toggle();
-      await tick(3000);
-      await controller.seekRelative(-3000);
+      await tick(10000);
+      await controller.skipToPrevCueOrSeekBack(
+        seekSeconds: 3,
+        degradeFarCueToTimeSeek: true,
+      );
+      await controller.skipToPrevCueOrSeekBack(
+        seekSeconds: 3,
+        degradeFarCueToTimeSeek: true,
+      );
+      expect(seeks, <int>[10000, 5000, 1000]);
       await tick(1000);
       await tick(2000);
-      expect(seeks, <int>[3000, 1000]);
+      expect(seeks, <int>[10000, 5000, 1000, 1000]);
       await tick(1000);
-      await tick(2000);
-      expect(seeks, <int>[3000, 1000, 1000]);
+      await controller.skipToNextCueOrSeekForward(seekSeconds: 3);
+      await tick(5000);
+      await tick(6000);
+      expect(seeks, <int>[10000, 5000, 1000, 1000, 5000, 5000]);
     },
   );
 
@@ -149,10 +188,10 @@ void main() {
         seekSeconds: 3,
         degradeFarCueToTimeSeek: true,
       );
-      expect(controller.debugSeekTargetCueIndex, 0);
+      expect(seeks, <int>[10000, 1000]);
       await tick(1000);
       await tick(2000);
-      expect(seeks, <int>[10000, 1000]);
+      expect(seeks, <int>[10000, 1000, 1000]);
     },
   );
 
