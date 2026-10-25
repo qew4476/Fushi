@@ -113,9 +113,9 @@ extension ShortcutActionLabel on ShortcutAction {
       case ShortcutAction.videoPause:
         return t.shortcut_action_video_pause;
       case ShortcutAction.videoCopySubtitle:
-        return '${t.copy} ? ${t.video_setting_double_tap_subtitle}';
+        return t.shortcut_action_video_copy_subtitle;
       case ShortcutAction.videoCopySecondarySubtitle:
-        return '${t.copy} ? ${t.video_secondary_subtitle_sources}';
+        return t.shortcut_action_video_copy_secondary_subtitle;
       case ShortcutAction.videoPreviousSubtitle:
         return t.shortcut_action_video_previous_subtitle;
       case ShortcutAction.videoNextSubtitle:

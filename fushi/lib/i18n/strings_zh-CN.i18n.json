@@ -5748,6 +5748,8 @@
   "shortcut_action_reader_toggle_study_clock": "暂停 / 继续阅读计时",
   "shortcut_action_video_align_subtitle_to_next": "下一句字幕对齐到当前时间",
   "shortcut_action_video_align_subtitle_to_prev": "上一句字幕对齐到当前时间",
+  "shortcut_action_video_copy_secondary_subtitle": "复制副字幕",
+  "shortcut_action_video_copy_subtitle": "复制主字幕",
   "shortcut_action_video_cycle_secondary_subtitle_obscure": "循环副字幕遮蔽",
   "shortcut_action_video_cycle_subtitle_obscure": "循环字幕遮蔽模式",
   "shortcut_action_video_dismiss_dict": "关闭词典",

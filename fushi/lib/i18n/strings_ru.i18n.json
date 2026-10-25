@@ -5748,6 +5748,8 @@
   "shortcut_action_reader_toggle_study_clock": "Приостановить / возобновить таймер чтения",
   "shortcut_action_video_align_subtitle_to_next": "Совместить следующий субтитр с текущим моментом",
   "shortcut_action_video_align_subtitle_to_prev": "Совместить предыдущий субтитр с текущим моментом",
+  "shortcut_action_video_copy_secondary_subtitle": "Copy secondary subtitle",
+  "shortcut_action_video_copy_subtitle": "Copy primary subtitle",
   "shortcut_action_video_cycle_secondary_subtitle_obscure": "Cycle Secondary Subtitle Obscure",
   "shortcut_action_video_cycle_subtitle_obscure": "Cycle Subtitle Obscure Mode",
   "shortcut_action_video_dismiss_dict": "Закрыть словарь",

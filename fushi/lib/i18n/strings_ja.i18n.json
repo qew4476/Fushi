@@ -5748,6 +5748,8 @@
   "shortcut_action_reader_toggle_study_clock": "読書タイマーを一時停止 / 再開",
   "shortcut_action_video_align_subtitle_to_next": "次の字幕を現在位置に合わせる",
   "shortcut_action_video_align_subtitle_to_prev": "前の字幕を現在位置に合わせる",
+  "shortcut_action_video_copy_secondary_subtitle": "副字幕をコピー",
+  "shortcut_action_video_copy_subtitle": "主字幕をコピー",
   "shortcut_action_video_cycle_secondary_subtitle_obscure": "Cycle Secondary Subtitle Obscure",
   "shortcut_action_video_cycle_subtitle_obscure": "Cycle Subtitle Obscure Mode",
   "shortcut_action_video_dismiss_dict": "辞書を閉じる",

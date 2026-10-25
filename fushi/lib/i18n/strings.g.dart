@@ -1,7 +1,7 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 17
-/// Strings: 142443 (8379 per locale)
+/// Strings: 142477 (8381 per locale)
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -8429,6 +8429,9 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
       'Align next subtitle to now';
   String get shortcut_action_video_align_subtitle_to_prev =>
       'Align previous subtitle to now';
+  String get shortcut_action_video_copy_secondary_subtitle =>
+      'Copy secondary subtitle';
+  String get shortcut_action_video_copy_subtitle => 'Copy primary subtitle';
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
       'Cycle secondary subtitle obscure';
   String get shortcut_action_video_cycle_subtitle_obscure =>
@@ -26050,6 +26053,11 @@ class _StringsAr extends _StringsEn {
   @override
   String get shortcut_action_video_align_subtitle_to_prev =>
       'محاذاة الترجمة السابقة إلى الآن';
+  @override
+  String get shortcut_action_video_copy_secondary_subtitle =>
+      'Copy secondary subtitle';
+  @override
+  String get shortcut_action_video_copy_subtitle => 'Copy primary subtitle';
   @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
       'Cycle Secondary Subtitle Obscure';
@@ -46594,6 +46602,11 @@ class _StringsDe extends _StringsEn {
   @override
   String get shortcut_action_video_align_subtitle_to_prev =>
       'Vorherigen Untertitel auf jetzt ausrichten';
+  @override
+  String get shortcut_action_video_copy_secondary_subtitle =>
+      'Copy secondary subtitle';
+  @override
+  String get shortcut_action_video_copy_subtitle => 'Copy primary subtitle';
   @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
       'Cycle Secondary Subtitle Obscure';
@@ -67266,6 +67279,11 @@ class _StringsEs extends _StringsEn {
   @override
   String get shortcut_action_video_align_subtitle_to_prev =>
       'Alinear subtítulo anterior al ahora';
+  @override
+  String get shortcut_action_video_copy_secondary_subtitle =>
+      'Copy secondary subtitle';
+  @override
+  String get shortcut_action_video_copy_subtitle => 'Copy primary subtitle';
   @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
       'Cycle Secondary Subtitle Obscure';
@@ -88027,6 +88045,11 @@ class _StringsFr extends _StringsEn {
   String get shortcut_action_video_align_subtitle_to_prev =>
       'Aligner le sous-titre précédent sur maintenant';
   @override
+  String get shortcut_action_video_copy_secondary_subtitle =>
+      'Copy secondary subtitle';
+  @override
+  String get shortcut_action_video_copy_subtitle => 'Copy primary subtitle';
+  @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
       'Cycle Secondary Subtitle Obscure';
   @override
@@ -108554,6 +108577,11 @@ class _StringsId extends _StringsEn {
   @override
   String get shortcut_action_video_align_subtitle_to_prev =>
       'Selaraskan subtitle sebelumnya ke sekarang';
+  @override
+  String get shortcut_action_video_copy_secondary_subtitle =>
+      'Copy secondary subtitle';
+  @override
+  String get shortcut_action_video_copy_subtitle => 'Copy primary subtitle';
   @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
       'Cycle Secondary Subtitle Obscure';
@@ -129119,6 +129147,11 @@ class _StringsIt extends _StringsEn {
   String get shortcut_action_video_align_subtitle_to_prev =>
       'Allinea sottotitolo precedente al momento attuale';
   @override
+  String get shortcut_action_video_copy_secondary_subtitle =>
+      'Copy secondary subtitle';
+  @override
+  String get shortcut_action_video_copy_subtitle => 'Copy primary subtitle';
+  @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
       'Cycle Secondary Subtitle Obscure';
   @override
@@ -148999,6 +149032,10 @@ class _StringsJa extends _StringsEn {
   @override
   String get shortcut_action_video_align_subtitle_to_prev => '前の字幕を現在位置に合わせる';
   @override
+  String get shortcut_action_video_copy_secondary_subtitle => '副字幕をコピー';
+  @override
+  String get shortcut_action_video_copy_subtitle => '主字幕をコピー';
+  @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
       'Cycle Secondary Subtitle Obscure';
   @override
@@ -168605,6 +168642,11 @@ class _StringsKo extends _StringsEn {
   @override
   String get shortcut_action_video_align_subtitle_to_prev =>
       '이전 자막을 현재 시점에 맞추기';
+  @override
+  String get shortcut_action_video_copy_secondary_subtitle =>
+      'Copy secondary subtitle';
+  @override
+  String get shortcut_action_video_copy_subtitle => 'Copy primary subtitle';
   @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
       'Cycle Secondary Subtitle Obscure';
@@ -188878,6 +188920,11 @@ class _StringsNl extends _StringsEn {
   @override
   String get shortcut_action_video_align_subtitle_to_prev =>
       'Vorige ondertitel uitlijnen op nu';
+  @override
+  String get shortcut_action_video_copy_secondary_subtitle =>
+      'Copy secondary subtitle';
+  @override
+  String get shortcut_action_video_copy_subtitle => 'Copy primary subtitle';
   @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
       'Cycle Secondary Subtitle Obscure';
@@ -209477,6 +209524,11 @@ class _StringsPtBr extends _StringsEn {
   String get shortcut_action_video_align_subtitle_to_prev =>
       'Alinhar legenda anterior ao momento atual';
   @override
+  String get shortcut_action_video_copy_secondary_subtitle =>
+      'Copy secondary subtitle';
+  @override
+  String get shortcut_action_video_copy_subtitle => 'Copy primary subtitle';
+  @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
       'Cycle Secondary Subtitle Obscure';
   @override
@@ -230053,6 +230105,11 @@ class _StringsRu extends _StringsEn {
   String get shortcut_action_video_align_subtitle_to_prev =>
       'Совместить предыдущий субтитр с текущим моментом';
   @override
+  String get shortcut_action_video_copy_secondary_subtitle =>
+      'Copy secondary subtitle';
+  @override
+  String get shortcut_action_video_copy_subtitle => 'Copy primary subtitle';
+  @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
       'Cycle Secondary Subtitle Obscure';
   @override
@@ -250380,6 +250437,11 @@ class _StringsTh extends _StringsEn {
   @override
   String get shortcut_action_video_align_subtitle_to_prev =>
       'จัดคำบรรยายก่อนหน้าให้ตรงกับตอนนี้';
+  @override
+  String get shortcut_action_video_copy_secondary_subtitle =>
+      'Copy secondary subtitle';
+  @override
+  String get shortcut_action_video_copy_subtitle => 'Copy primary subtitle';
   @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
       'Cycle Secondary Subtitle Obscure';
@@ -270770,6 +270832,11 @@ class _StringsTr extends _StringsEn {
   String get shortcut_action_video_align_subtitle_to_prev =>
       'Önceki altyazıyı şimdiye hizala';
   @override
+  String get shortcut_action_video_copy_secondary_subtitle =>
+      'Copy secondary subtitle';
+  @override
+  String get shortcut_action_video_copy_subtitle => 'Copy primary subtitle';
+  @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
       'Cycle Secondary Subtitle Obscure';
   @override
@@ -291159,6 +291226,11 @@ class _StringsVi extends _StringsEn {
   String get shortcut_action_video_align_subtitle_to_prev =>
       'Căn phụ đề trước đó về thời điểm hiện tại';
   @override
+  String get shortcut_action_video_copy_secondary_subtitle =>
+      'Copy secondary subtitle';
+  @override
+  String get shortcut_action_video_copy_subtitle => 'Copy primary subtitle';
+  @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
       'Cycle Secondary Subtitle Obscure';
   @override
@@ -310327,6 +310399,10 @@ class _StringsZhCn extends _StringsEn {
   @override
   String get shortcut_action_video_align_subtitle_to_prev => '上一句字幕对齐到当前时间';
   @override
+  String get shortcut_action_video_copy_secondary_subtitle => '复制副字幕';
+  @override
+  String get shortcut_action_video_copy_subtitle => '复制主字幕';
+  @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
       '循环副字幕遮蔽';
   @override
@@ -329178,6 +329254,10 @@ class _StringsZhHk extends _StringsEn {
   @override
   String get shortcut_action_video_align_subtitle_to_prev => '上一句字幕對齊到當前時間';
   @override
+  String get shortcut_action_video_copy_secondary_subtitle => '複製副字幕';
+  @override
+  String get shortcut_action_video_copy_subtitle => '複製主字幕';
+  @override
   String get shortcut_action_video_cycle_secondary_subtitle_obscure =>
       'Cycle Secondary Subtitle Obscure';
   @override
@@ -347038,6 +347118,10 @@ extension on _StringsEn {
         return 'Align next subtitle to now';
       case 'shortcut_action_video_align_subtitle_to_prev':
         return 'Align previous subtitle to now';
+      case 'shortcut_action_video_copy_secondary_subtitle':
+        return 'Copy secondary subtitle';
+      case 'shortcut_action_video_copy_subtitle':
+        return 'Copy primary subtitle';
       case 'shortcut_action_video_cycle_secondary_subtitle_obscure':
         return 'Cycle secondary subtitle obscure';
       case 'shortcut_action_video_cycle_subtitle_obscure':
@@ -364426,6 +364510,10 @@ extension on _StringsAr {
         return 'محاذاة الترجمة التالية إلى الآن';
       case 'shortcut_action_video_align_subtitle_to_prev':
         return 'محاذاة الترجمة السابقة إلى الآن';
+      case 'shortcut_action_video_copy_secondary_subtitle':
+        return 'Copy secondary subtitle';
+      case 'shortcut_action_video_copy_subtitle':
+        return 'Copy primary subtitle';
       case 'shortcut_action_video_cycle_secondary_subtitle_obscure':
         return 'Cycle Secondary Subtitle Obscure';
       case 'shortcut_action_video_cycle_subtitle_obscure':
@@ -381870,6 +381958,10 @@ extension on _StringsDe {
         return 'Nächsten Untertitel auf jetzt ausrichten';
       case 'shortcut_action_video_align_subtitle_to_prev':
         return 'Vorherigen Untertitel auf jetzt ausrichten';
+      case 'shortcut_action_video_copy_secondary_subtitle':
+        return 'Copy secondary subtitle';
+      case 'shortcut_action_video_copy_subtitle':
+        return 'Copy primary subtitle';
       case 'shortcut_action_video_cycle_secondary_subtitle_obscure':
         return 'Cycle Secondary Subtitle Obscure';
       case 'shortcut_action_video_cycle_subtitle_obscure':
@@ -399318,6 +399410,10 @@ extension on _StringsEs {
         return 'Alinear siguiente subtítulo al ahora';
       case 'shortcut_action_video_align_subtitle_to_prev':
         return 'Alinear subtítulo anterior al ahora';
+      case 'shortcut_action_video_copy_secondary_subtitle':
+        return 'Copy secondary subtitle';
+      case 'shortcut_action_video_copy_subtitle':
+        return 'Copy primary subtitle';
       case 'shortcut_action_video_cycle_secondary_subtitle_obscure':
         return 'Cycle Secondary Subtitle Obscure';
       case 'shortcut_action_video_cycle_subtitle_obscure':
@@ -416777,6 +416873,10 @@ extension on _StringsFr {
         return 'Aligner le sous-titre suivant sur maintenant';
       case 'shortcut_action_video_align_subtitle_to_prev':
         return 'Aligner le sous-titre précédent sur maintenant';
+      case 'shortcut_action_video_copy_secondary_subtitle':
+        return 'Copy secondary subtitle';
+      case 'shortcut_action_video_copy_subtitle':
+        return 'Copy primary subtitle';
       case 'shortcut_action_video_cycle_secondary_subtitle_obscure':
         return 'Cycle Secondary Subtitle Obscure';
       case 'shortcut_action_video_cycle_subtitle_obscure':
@@ -434196,6 +434296,10 @@ extension on _StringsId {
         return 'Selaraskan subtitle berikutnya ke sekarang';
       case 'shortcut_action_video_align_subtitle_to_prev':
         return 'Selaraskan subtitle sebelumnya ke sekarang';
+      case 'shortcut_action_video_copy_secondary_subtitle':
+        return 'Copy secondary subtitle';
+      case 'shortcut_action_video_copy_subtitle':
+        return 'Copy primary subtitle';
       case 'shortcut_action_video_cycle_secondary_subtitle_obscure':
         return 'Cycle Secondary Subtitle Obscure';
       case 'shortcut_action_video_cycle_subtitle_obscure':
@@ -451624,6 +451728,10 @@ extension on _StringsIt {
         return 'Allinea sottotitolo successivo al momento attuale';
       case 'shortcut_action_video_align_subtitle_to_prev':
         return 'Allinea sottotitolo precedente al momento attuale';
+      case 'shortcut_action_video_copy_secondary_subtitle':
+        return 'Copy secondary subtitle';
+      case 'shortcut_action_video_copy_subtitle':
+        return 'Copy primary subtitle';
       case 'shortcut_action_video_cycle_secondary_subtitle_obscure':
         return 'Cycle Secondary Subtitle Obscure';
       case 'shortcut_action_video_cycle_subtitle_obscure':
@@ -468986,6 +469094,10 @@ extension on _StringsJa {
         return '次の字幕を現在位置に合わせる';
       case 'shortcut_action_video_align_subtitle_to_prev':
         return '前の字幕を現在位置に合わせる';
+      case 'shortcut_action_video_copy_secondary_subtitle':
+        return '副字幕をコピー';
+      case 'shortcut_action_video_copy_subtitle':
+        return '主字幕をコピー';
       case 'shortcut_action_video_cycle_secondary_subtitle_obscure':
         return 'Cycle Secondary Subtitle Obscure';
       case 'shortcut_action_video_cycle_subtitle_obscure':
@@ -486304,6 +486416,10 @@ extension on _StringsKo {
         return '다음 자막을 현재 시점에 맞추기';
       case 'shortcut_action_video_align_subtitle_to_prev':
         return '이전 자막을 현재 시점에 맞추기';
+      case 'shortcut_action_video_copy_secondary_subtitle':
+        return 'Copy secondary subtitle';
+      case 'shortcut_action_video_copy_subtitle':
+        return 'Copy primary subtitle';
       case 'shortcut_action_video_cycle_secondary_subtitle_obscure':
         return 'Cycle Secondary Subtitle Obscure';
       case 'shortcut_action_video_cycle_subtitle_obscure':
@@ -503705,6 +503821,10 @@ extension on _StringsNl {
         return 'Volgende ondertitel uitlijnen op nu';
       case 'shortcut_action_video_align_subtitle_to_prev':
         return 'Vorige ondertitel uitlijnen op nu';
+      case 'shortcut_action_video_copy_secondary_subtitle':
+        return 'Copy secondary subtitle';
+      case 'shortcut_action_video_copy_subtitle':
+        return 'Copy primary subtitle';
       case 'shortcut_action_video_cycle_secondary_subtitle_obscure':
         return 'Cycle Secondary Subtitle Obscure';
       case 'shortcut_action_video_cycle_subtitle_obscure':
@@ -521137,6 +521257,10 @@ extension on _StringsPtBr {
         return 'Alinhar próxima legenda ao momento atual';
       case 'shortcut_action_video_align_subtitle_to_prev':
         return 'Alinhar legenda anterior ao momento atual';
+      case 'shortcut_action_video_copy_secondary_subtitle':
+        return 'Copy secondary subtitle';
+      case 'shortcut_action_video_copy_subtitle':
+        return 'Copy primary subtitle';
       case 'shortcut_action_video_cycle_secondary_subtitle_obscure':
         return 'Cycle Secondary Subtitle Obscure';
       case 'shortcut_action_video_cycle_subtitle_obscure':
@@ -538573,6 +538697,10 @@ extension on _StringsRu {
         return 'Совместить следующий субтитр с текущим моментом';
       case 'shortcut_action_video_align_subtitle_to_prev':
         return 'Совместить предыдущий субтитр с текущим моментом';
+      case 'shortcut_action_video_copy_secondary_subtitle':
+        return 'Copy secondary subtitle';
+      case 'shortcut_action_video_copy_subtitle':
+        return 'Copy primary subtitle';
       case 'shortcut_action_video_cycle_secondary_subtitle_obscure':
         return 'Cycle Secondary Subtitle Obscure';
       case 'shortcut_action_video_cycle_subtitle_obscure':
@@ -555969,6 +556097,10 @@ extension on _StringsTh {
         return 'จัดคำบรรยายถัดไปให้ตรงกับตอนนี้';
       case 'shortcut_action_video_align_subtitle_to_prev':
         return 'จัดคำบรรยายก่อนหน้าให้ตรงกับตอนนี้';
+      case 'shortcut_action_video_copy_secondary_subtitle':
+        return 'Copy secondary subtitle';
+      case 'shortcut_action_video_copy_subtitle':
+        return 'Copy primary subtitle';
       case 'shortcut_action_video_cycle_secondary_subtitle_obscure':
         return 'Cycle Secondary Subtitle Obscure';
       case 'shortcut_action_video_cycle_subtitle_obscure':
@@ -573383,6 +573515,10 @@ extension on _StringsTr {
         return 'Sonraki altyazıyı şimdiye hizala';
       case 'shortcut_action_video_align_subtitle_to_prev':
         return 'Önceki altyazıyı şimdiye hizala';
+      case 'shortcut_action_video_copy_secondary_subtitle':
+        return 'Copy secondary subtitle';
+      case 'shortcut_action_video_copy_subtitle':
+        return 'Copy primary subtitle';
       case 'shortcut_action_video_cycle_secondary_subtitle_obscure':
         return 'Cycle Secondary Subtitle Obscure';
       case 'shortcut_action_video_cycle_subtitle_obscure':
@@ -590792,6 +590928,10 @@ extension on _StringsVi {
         return 'Căn phụ đề tiếp theo về thời điểm hiện tại';
       case 'shortcut_action_video_align_subtitle_to_prev':
         return 'Căn phụ đề trước đó về thời điểm hiện tại';
+      case 'shortcut_action_video_copy_secondary_subtitle':
+        return 'Copy secondary subtitle';
+      case 'shortcut_action_video_copy_subtitle':
+        return 'Copy primary subtitle';
       case 'shortcut_action_video_cycle_secondary_subtitle_obscure':
         return 'Cycle Secondary Subtitle Obscure';
       case 'shortcut_action_video_cycle_subtitle_obscure':
@@ -608062,6 +608202,10 @@ extension on _StringsZhCn {
         return '下一句字幕对齐到当前时间';
       case 'shortcut_action_video_align_subtitle_to_prev':
         return '上一句字幕对齐到当前时间';
+      case 'shortcut_action_video_copy_secondary_subtitle':
+        return '复制副字幕';
+      case 'shortcut_action_video_copy_subtitle':
+        return '复制主字幕';
       case 'shortcut_action_video_cycle_secondary_subtitle_obscure':
         return '循环副字幕遮蔽';
       case 'shortcut_action_video_cycle_subtitle_obscure':
@@ -625292,6 +625436,10 @@ extension on _StringsZhHk {
         return '下一句字幕對齊到當前時間';
       case 'shortcut_action_video_align_subtitle_to_prev':
         return '上一句字幕對齊到當前時間';
+      case 'shortcut_action_video_copy_secondary_subtitle':
+        return '複製副字幕';
+      case 'shortcut_action_video_copy_subtitle':
+        return '複製主字幕';
       case 'shortcut_action_video_cycle_secondary_subtitle_obscure':
         return 'Cycle Secondary Subtitle Obscure';
       case 'shortcut_action_video_cycle_subtitle_obscure':

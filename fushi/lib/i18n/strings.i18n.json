@@ -5748,6 +5748,8 @@
   "shortcut_action_reader_toggle_study_clock": "Pause / resume reading timer",
   "shortcut_action_video_align_subtitle_to_next": "Align next subtitle to now",
   "shortcut_action_video_align_subtitle_to_prev": "Align previous subtitle to now",
+  "shortcut_action_video_copy_secondary_subtitle": "Copy secondary subtitle",
+  "shortcut_action_video_copy_subtitle": "Copy primary subtitle",
   "shortcut_action_video_cycle_secondary_subtitle_obscure": "Cycle secondary subtitle obscure",
   "shortcut_action_video_cycle_subtitle_obscure": "Cycle subtitle obscure mode",
   "shortcut_action_video_dismiss_dict": "Dismiss dictionary",

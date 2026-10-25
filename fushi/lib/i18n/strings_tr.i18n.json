@@ -5748,6 +5748,8 @@
   "shortcut_action_reader_toggle_study_clock": "Okuma zamanlayıcısını duraklat / sürdür",
   "shortcut_action_video_align_subtitle_to_next": "Sonraki altyazıyı şimdiye hizala",
   "shortcut_action_video_align_subtitle_to_prev": "Önceki altyazıyı şimdiye hizala",
+  "shortcut_action_video_copy_secondary_subtitle": "Copy secondary subtitle",
+  "shortcut_action_video_copy_subtitle": "Copy primary subtitle",
   "shortcut_action_video_cycle_secondary_subtitle_obscure": "Cycle Secondary Subtitle Obscure",
   "shortcut_action_video_cycle_subtitle_obscure": "Cycle Subtitle Obscure Mode",
   "shortcut_action_video_dismiss_dict": "Sözlüğü kapat",

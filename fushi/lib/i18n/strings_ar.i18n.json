@@ -5748,6 +5748,8 @@
   "shortcut_action_reader_toggle_study_clock": "إيقاف / استئناف مؤقّت القراءة",
   "shortcut_action_video_align_subtitle_to_next": "محاذاة الترجمة التالية إلى الآن",
   "shortcut_action_video_align_subtitle_to_prev": "محاذاة الترجمة السابقة إلى الآن",
+  "shortcut_action_video_copy_secondary_subtitle": "Copy secondary subtitle",
+  "shortcut_action_video_copy_subtitle": "Copy primary subtitle",
   "shortcut_action_video_cycle_secondary_subtitle_obscure": "Cycle Secondary Subtitle Obscure",
   "shortcut_action_video_cycle_subtitle_obscure": "Cycle Subtitle Obscure Mode",
   "shortcut_action_video_dismiss_dict": "إغلاق القاموس",
