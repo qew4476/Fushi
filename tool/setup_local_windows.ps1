@@ -37,6 +37,7 @@ Install-Package 'Kitware.CMake'
 Install-Package 'Rustlang.Rustup'
 Install-Package '7zip.7zip'
 Install-Package 'GitHub.cli'
+Install-Package 'Microsoft.NuGet'
 $tools = Join-Path $env:LOCALAPPDATA 'FushiBuild'
 $vcpkg = Join-Path $tools 'vcpkg'
 if (-not (Test-Path "$vcpkg/.git")) {
