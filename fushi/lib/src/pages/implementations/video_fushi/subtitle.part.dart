@@ -2104,6 +2104,8 @@ extension _VideoSubtitle on _VideoFushiPageState {
       final RemoteVideoClient? client = _effectiveRemoteClient;
       final RemoteVideoInfo? info = _effectiveRemoteInfo;
       if (streamIndex == null || client == null || info == null) return;
+      final RemoteVideoEmbeddedSubtitleTrack? track =
+          _remoteEmbeddedTrackByStreamIndex(streamIndex);
       final (_, int ep) = _remotePositionKeyForIndex(_currentEpisode);
       try {
         final Directory temp = await getTemporaryDirectory();
@@ -2112,7 +2114,8 @@ extension _VideoSubtitle on _VideoFushiPageState {
             temp.path,
             _remoteSubtitleTempFileName(
               '${info.id}_sec$streamIndex',
-              'embedded_$streamIndex.srt',
+              // 与手选副轨一致：服务器返回原格式，解析器按扩展名选择。
+              track?.fileName ?? 'embedded_$streamIndex.srt',
             ),
           ),
         );
@@ -2126,8 +2129,6 @@ extension _VideoSubtitle on _VideoFushiPageState {
       } catch (e) {
         debugPrint('[VideoFushiPage] secondary embedded replay failed: $e');
         // 兼容层抽不出（BUG-2590 同款）：恢复也走 libmpv 副轨解码回落，静默。
-        final RemoteVideoEmbeddedSubtitleTrack? track =
-            _remoteEmbeddedTrackByStreamIndex(streamIndex);
         if (track == null ||
             !track.isText ||
             !_remoteStreamIsOriginalContainer ||

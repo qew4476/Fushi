@@ -38,6 +38,7 @@
 | BUG | 修复 | 测试 | 标题 |
 |---|:--:|:--:|---|
 | [BUG-3524](bugs/BUG-3524-sentence-repeat-navigation.md) | ✅ | ✅ | 句子循環未隨主動跳句更新目標 |
+| [BUG-3524](bugs/BUG-3524-secondary-subtitle-resume-format.md) | ✅ | ✅ | 影片續播時 ASS／VTT 副字幕消失 |
 | [BUG-3523](bugs/BUG-3523-local-release-origin-target.md) | ✅ | ✅ | local-release-origin-target |
 | [BUG-3522](bugs/BUG-3522-mihon-windows-long-path-cleanup.md) | ✅ | ✅ | mihon-windows-long-path-cleanup |
 | [BUG-3521](bugs/BUG-3521-mihon-windows-archive-lock.md) | ✅ | ✅ | mihon-windows-archive-lock |
