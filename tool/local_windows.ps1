@@ -65,6 +65,8 @@ try {
     Push-Location (Join-Path $root 'fushi')
     try {
         if ($Command -eq 'dev') {
+            if (-not $env:FUSHI_FFMPEG) { $env:FUSHI_FFMPEG = Join-Path $root 'third_party/ffmpeg-min/windows/ffmpeg.exe' }
+            if (-not $env:FUSHI_FFPROBE) { $env:FUSHI_FFPROBE = Join-Path $root 'third_party/ffmpeg-min/windows/ffprobe.exe' }
             Invoke-Checked $flutter @('run','-d','windows','--no-pub')
             exit 0
         }
@@ -78,6 +80,11 @@ try {
     Invoke-Script 'tools/build_magpie_slim.ps1'
     $appVersion = [regex]::Match((Get-Content 'fushi/pubspec.yaml' -Raw),'(?m)^version:\s*(\S+)').Groups[1].Value.Split('+')[0]
     $commit = (& git rev-parse HEAD | Out-String).Trim()
+    $originUrl = (& git remote get-url origin | Out-String).Trim()
+    $sourceRepo = [regex]::Match($originUrl, 'github\.com[:/]([^/]+/[^/]+?)(?:\.git)?$')
+    if (-not $sourceRepo.Success) { throw 'origin must identify the GitHub source repository for the bundled source notice.' }
+    $env:FUSHI_SOURCE_REPO = $sourceRepo.Groups[1].Value
+    $env:FUSHI_SOURCE_COMMIT = $commit
     $buildVersion = "$appVersion-local.$($commit.Substring(0,10))"
     $bundle = Join-Path $root 'fushi/build/windows/x64/runner/Release'
     Push-Location (Join-Path $root 'fushi')
