@@ -45,6 +45,8 @@ Download the latest release from the [Fushi website](https://fushi.moe/) — And
 
 ## Building
 
+Windows local commands: `.\fushi setup`, `.\fushi dev`, `.\fushi build`, `.\fushi release`. See [Windows local setup and releases](LOCAL_WINDOWS.md).
+
 One-command prep (`flutter pub get` + apply patches), then build:
 
 ```bash
