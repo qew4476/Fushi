@@ -7510,6 +7510,8 @@ class _VideoFushiPageState extends ConsumerState<VideoFushiPage>
       toggleFavoriteSentence: () => _runWhenImmersiveAllowsShortcuts(
         () => unawaited(_toggleFavoriteCurrentCue()),
       ),
+      copySubtitle: () => _copyCurrentSubtitles(secondary: false),
+      copySecondarySubtitle: () => _copyCurrentSubtitles(secondary: true),
       replayCurrentSubtitle: () => _runWhenImmersiveAllowsShortcuts(
         () => unawaited(_replayCurrentCueAndKeepControls()),
       ),

@@ -441,6 +441,8 @@ enum ShortcutAction {
   videoHoldSpeed(ShortcutScope.video, 'video_hold_speed'),
 
   // 字幕/章节跳转
+  videoCopySubtitle(ShortcutScope.video, 'video_copy_subtitle'),
+  videoCopySecondarySubtitle(ShortcutScope.video, 'video_copy_secondary_subtitle'),
   videoPreviousSubtitle(ShortcutScope.video, 'video_previous_subtitle'),
   videoNextSubtitle(ShortcutScope.video, 'video_next_subtitle'),
   videoReplayCurrentSubtitle(

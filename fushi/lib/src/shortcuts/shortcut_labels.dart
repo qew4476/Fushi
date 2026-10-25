@@ -112,6 +112,10 @@ extension ShortcutActionLabel on ShortcutAction {
         return t.shortcut_action_video_play;
       case ShortcutAction.videoPause:
         return t.shortcut_action_video_pause;
+      case ShortcutAction.videoCopySubtitle:
+        return '${t.copy} ? ${t.video_setting_double_tap_subtitle}';
+      case ShortcutAction.videoCopySecondarySubtitle:
+        return '${t.copy} ? ${t.video_secondary_subtitle_sources}';
       case ShortcutAction.videoPreviousSubtitle:
         return t.shortcut_action_video_previous_subtitle;
       case ShortcutAction.videoNextSubtitle:
@@ -363,6 +367,9 @@ extension ShortcutActionIcon on ShortcutAction {
         return FushiIcons.fastForward;
 
       // 字幕跳转 / 重播
+      case ShortcutAction.videoCopySubtitle:
+      case ShortcutAction.videoCopySecondarySubtitle:
+        return FushiIcons.copy;
       case ShortcutAction.videoPreviousSubtitle:
         return FushiIcons.skipPrevious;
       case ShortcutAction.videoNextSubtitle:

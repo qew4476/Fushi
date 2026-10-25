@@ -223,6 +223,8 @@ class _Rig {
       cycleSecondarySubtitleObscure: _noop,
       toggleSecondarySubtitleHide: _noop,
       toggleFavoriteSentence: _noop,
+      copySubtitle: () {},
+      copySecondarySubtitle: () {},
       replayCurrentSubtitle: _noop,
       replayPreviousSubtitle: _noop,
       previousChapter: _noop,

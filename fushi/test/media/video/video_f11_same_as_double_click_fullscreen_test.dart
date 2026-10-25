@@ -169,6 +169,8 @@ VideoPlayerShortcutActions _actions(List<String> log) {
         record('cycleSecondarySubtitleObscure'),
     toggleSecondarySubtitleHide: () => record('toggleSecondarySubtitleHide'),
     toggleFavoriteSentence: () => record('toggleFavoriteSentence'),
+    copySubtitle: () {},
+    copySecondarySubtitle: () {},
     replayCurrentSubtitle: () => record('replayCurrentSubtitle'),
     replayPreviousSubtitle: () => record('replayPreviousSubtitle'),
     previousChapter: () => record('previousChapter'),

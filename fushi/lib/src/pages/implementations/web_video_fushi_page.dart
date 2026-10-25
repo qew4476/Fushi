@@ -1564,6 +1564,8 @@ class _WebVideoFushiPageState extends ConsumerState<WebVideoFushiPage>
       cycleSecondarySubtitleObscure: noop,
       toggleSecondarySubtitleHide: noop,
       toggleFavoriteSentence: () => unawaited(_toggleFavoriteCurrent()),
+      copySubtitle: () => _copyCurrentSubtitles(secondary: false),
+      copySecondarySubtitle: () => _copyCurrentSubtitles(secondary: true),
       replayCurrentSubtitle: () {
         final AudioCue? cue = _controller.currentCue ?? _lastLookupCue;
         if (cue != null) unawaited(_seekMs(cue.startMs));
@@ -1581,6 +1583,17 @@ class _WebVideoFushiPageState extends ConsumerState<WebVideoFushiPage>
       enterCaret: noop,
       escape: _onEscape,
     );
+  }
+
+  void _copyCurrentSubtitles({required bool secondary}) {
+    final List<AudioCue> cues = secondary
+        ? _controller.secondaryActiveCues
+        : _controller.activeCues;
+    final String text = cues
+        .map((AudioCue cue) => cue.text.trim())
+        .where((String text) => text.isNotEmpty)
+        .join('\n');
+    if (text.isNotEmpty) _appModel.copyToClipboard(text);
   }
 
   Map<ShortcutActivator, VoidCallback> _keyboardShortcuts() =>

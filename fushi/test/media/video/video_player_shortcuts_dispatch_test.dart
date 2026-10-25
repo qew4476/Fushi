@@ -45,6 +45,8 @@ VideoPlayerShortcutActions _recordingVideoActions(List<String> log) {
         record('cycleSecondarySubtitleObscure'),
     toggleSecondarySubtitleHide: () => record('toggleSecondarySubtitleHide'),
     toggleFavoriteSentence: () => record('toggleFavoriteSentence'),
+    copySubtitle: () => record('copySubtitle'),
+    copySecondarySubtitle: () => record('copySecondarySubtitle'),
     replayCurrentSubtitle: () => record('replayCurrentSubtitle'),
     replayPreviousSubtitle: () => record('replayPreviousSubtitle'),
     previousChapter: () => record('previousChapter'),
@@ -96,6 +98,16 @@ Future<void> _sendWithModifiers(
 }
 
 void main() {
+  testWidgets('Ctrl+C and Ctrl+Shift+C copy distinct subtitle tracks',
+      (WidgetTester tester) async {
+    final List<String> log = <String>[];
+    await _pumpShortcutHarness(tester, log);
+    await _sendWithModifiers(tester, LogicalKeyboardKey.keyC, control: true);
+    await _sendWithModifiers(tester, LogicalKeyboardKey.keyC,
+        control: true, shift: true);
+    expect(log, <String>['copySubtitle', 'copySecondarySubtitle']);
+  });
+
   testWidgets('video shortcuts dispatch to favorite, replay, and list actions',
       (WidgetTester tester) async {
     final List<String> log = <String>[];

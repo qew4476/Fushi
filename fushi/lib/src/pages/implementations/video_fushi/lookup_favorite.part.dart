@@ -247,6 +247,24 @@ extension _VideoLookupFavorite on _VideoFushiPageState {
     await controller.skipToCue(cue);
   }
 
+  void _copyCurrentSubtitles({required bool secondary}) {
+    final VideoPlayerController? controller = _controller;
+    if (controller == null) return;
+    final List<AudioCue> cues = secondary
+        ? controller.secondaryActiveCues
+        : controller.activeCues;
+    final String text = cues
+        .map((AudioCue cue) => cue.text.trim())
+        .where((String text) => text.isNotEmpty)
+        .join('\n');
+    if (text.isEmpty) {
+      _showOsd(t.no_sentence_selected);
+      return;
+    }
+    unawaited(Clipboard.setData(ClipboardData(text: text)));
+    _showOsd(t.copied_to_clipboard);
+  }
+
   /// 查词浮层顶栏「复制」：复制当前查词那句的字幕文本。
   ///
   /// 优先复制锚定 cue 的文本（与收藏 / 制卡取的是同一句）；没有 cue 时（无字幕轨、

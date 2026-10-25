@@ -21,6 +21,8 @@ VideoPlayerShortcutActions _dummyActions() {
     pause: noop,
     previousSubtitle: noop,
     nextSubtitle: noop,
+    copySubtitle: () {},
+    copySecondarySubtitle: () {},
     replayCurrentSubtitle: noop,
     replayPreviousSubtitle: noop,
     seekBackward: noop,

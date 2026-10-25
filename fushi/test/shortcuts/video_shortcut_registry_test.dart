@@ -43,6 +43,8 @@ VideoPlayerShortcutActions _recordingActions(List<String> log) {
         log.add('cycleSecondarySubtitleObscure'),
     toggleSecondarySubtitleHide: () => log.add('toggleSecondarySubtitleHide'),
     toggleFavoriteSentence: () => log.add('toggleFavoriteSentence'),
+    copySubtitle: () {},
+    copySecondarySubtitle: () {},
     replayCurrentSubtitle: () => log.add('replayCurrentSubtitle'),
     replayPreviousSubtitle: () => log.add('replayPreviousSubtitle'),
     previousChapter: () => log.add('previousChapter'),

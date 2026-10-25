@@ -199,6 +199,8 @@ void main() {
         cycleSecondarySubtitleObscure: noop,
         toggleSecondarySubtitleHide: noop,
         toggleFavoriteSentence: noop,
+        copySubtitle: () {},
+        copySecondarySubtitle: () {},
         replayCurrentSubtitle: noop,
         replayPreviousSubtitle: noop,
         previousChapter: noop,
