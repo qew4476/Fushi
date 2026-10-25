@@ -8,6 +8,7 @@ param(
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 . (Join-Path $PSScriptRoot "verified_archive.ps1")
+. (Join-Path $PSScriptRoot "remove_build_tree.ps1")
 
 # 上游 miru-project/M-Extension-Server 已从 GitHub 消失（404），原先的 `git clone`
 # 会转去交互取凭据并以 exit 128 挂掉整个 job。源码按 MPL-2.0 vendored 进
@@ -222,7 +223,7 @@ try {
         [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($resolvedOutput)) | Out-Null
         Move-Item -LiteralPath $stagingRoot -Destination $resolvedOutput
         if ($null -ne $backup) {
-            Remove-Item -LiteralPath $backup -Recurse -Force
+            Remove-BuildTree -LiteralPath $backup -AllowedParent ([IO.Path]::GetDirectoryName($resolvedOutput))
         }
     } catch {
         if ($null -ne $backup -and -not (Test-Path -LiteralPath $resolvedOutput)) {
@@ -231,7 +232,5 @@ try {
         throw
     }
 } finally {
-    if (Test-Path -LiteralPath $workingRoot) {
-        Remove-Item -LiteralPath $workingRoot -Recurse -Force
-    }
+    Remove-BuildTree -LiteralPath $workingRoot -AllowedParent ([IO.Path]::GetTempPath())
 }
