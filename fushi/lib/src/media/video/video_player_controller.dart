@@ -590,7 +590,7 @@ class VideoPlayerController extends ChangeNotifier
 
   bool get isRepeatingSentence => _repeatingCue != null;
 
-  /// Lock the current primary cue until explicitly disabled or the source changes.
+  /// Repeat the primary cue until disabled; explicit cue navigation moves the loop.
   /// External players supply transport callbacks but share the same seek protection.
   Future<bool> toggleSentenceRepeat({
     AudioCue? cue,
@@ -5796,6 +5796,17 @@ class VideoPlayerController extends ChangeNotifier
     // snap 回目标句，消除「点第 N 行高亮 N-1」。解析不到下标（cue 不在 _cues）时为 null，
     // 退回纯位置推导。**在 seek 之前先算好**，避免下面 await 期间 _cues 被异步改写。
     final int? targetIndex = _resolveCueIndex(cue);
+    // Move the active loop before seeking and invalidate old async loop callbacks.
+    final int? repeatGeneration;
+    if (isRepeatingSentence && targetIndex != null && cue.endMs > cue.startMs) {
+      _repeatingCue = cue;
+      repeatGeneration = ++_sentenceRepeatGeneration;
+      _sentenceRepeatSeeking = true;
+      _sentenceRepeatCompleted = false;
+    } else {
+      repeatGeneration = null;
+    }
+
     // **顺序关键（TODO-565 复核退回的必修项）**：先 await [_rawSeekMs] 发出 seek——它开头
     // 会把**上一个**主动跳转快照清掉（统一清除点），故本句快照必须在它**之后**才置，否则会被
     // 自清成 off-by-one 又复发。await 与同步置快照在单线程事件循环里对后续 tick 等价可见
@@ -5807,7 +5818,18 @@ class VideoPlayerController extends ChangeNotifier
       preRollMs: kCueSeekPreRollMs,
       prevCueStartMs: _prevCueStartMsBefore(cue.startMs),
     ).clamp(0, 1 << 30);
-    await _rawSeekMs(landingMs);
+    try {
+      await _rawSeekMs(landingMs);
+    } finally {
+      if (repeatGeneration != null &&
+          repeatGeneration == _sentenceRepeatGeneration) {
+        _sentenceRepeatSeeking = false;
+      }
+    }
+    if (repeatGeneration != null &&
+        repeatGeneration != _sentenceRepeatGeneration) {
+      return;
+    }
     _seekTargetCueIndex = targetIndex;
     // 充满在途 seek 宽限（TODO-565 复核退回的真机时序）：异步 seek 落地前 tick 会先读到
     // 旧 position，宽限让快照撑到落点，避免在途 stale tick 把快照提前清掉 → off-by-one。

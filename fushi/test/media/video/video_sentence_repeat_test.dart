@@ -59,6 +59,52 @@ void main() {
     },
   );
 
+  test('next sentence becomes the loop target until toggled off', () async {
+    await toggle();
+    await tick(1000);
+    await controller.skipToNextCue();
+    expect(controller.isRepeatingSentence, isTrue);
+    await tick(3000);
+    await tick(4000);
+    expect(seeks, <int>[1000, 3000]);
+    await tick(3000);
+    await tick(4100);
+    expect(seeks, <int>[1000, 3000, 3000]);
+    expect(await toggle(), isFalse);
+    await tick(3000);
+    await tick(4100);
+    expect(seeks, hasLength(3));
+  });
+
+  test('selecting a previous sentence moves the loop back', () async {
+    await tick(3500);
+    await toggle();
+    await tick(3000);
+    await controller.skipToPrevCue();
+    await tick(1000);
+    await tick(2000);
+    expect(seeks, <int>[3000, 1000]);
+    expect(controller.isRepeatingSentence, isTrue);
+  });
+
+  test('navigation invalidates a pending loop start', () async {
+    final Completer<void> pending = Completer<void>();
+    final Future<bool> started = controller.toggleSentenceRepeat(
+      seek: (int ms) {
+        seeks.add(ms);
+        return seeks.length == 1 ? pending.future : Future<void>.value();
+      },
+      play: () async => plays++,
+    );
+    await controller.skipToCue(controller.cues[1]);
+    pending.complete();
+    await started;
+    expect(plays, 0);
+    await tick(3000);
+    await tick(4000);
+    expect(seeks, <int>[1000, 3000]);
+  });
+
   test('paused playback does not seek at the sentence end', () async {
     await toggle();
     await tick(1000);
