@@ -40,7 +40,10 @@ try {
     $out = Join-Path $root 'dist/local-windows'
     $manifestPath = Join-Path $out 'build.json'
     if ($Command -eq 'release') {
-        if (-not (Test-Path $manifestPath)) { throw 'Run .\fushi build first.' }
+        $buildArguments = @('-Command','build')
+        if ($VcpkgRoot) { $buildArguments += @('-VcpkgRoot',$VcpkgRoot) }
+        Invoke-Script 'tool/local_windows.ps1' $buildArguments
+        if (-not (Test-Path $manifestPath)) { throw 'Build completed without build.json; refusing to upload.' }
         $m = Get-Content $manifestPath -Raw | ConvertFrom-Json
         $installer = Join-Path $out $m.file
         if ((Get-FileHash $installer -Algorithm SHA256).Hash -ne $m.sha256) { throw 'Installer checksum differs from build.json.' }
